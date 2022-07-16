@@ -10,6 +10,11 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
+    ],
   },
   overrides: [
     {
