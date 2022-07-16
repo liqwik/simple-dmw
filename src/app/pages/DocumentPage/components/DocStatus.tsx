@@ -1,3 +1,4 @@
+import React from 'react';
 import { Badge } from 'antd';
 import { docStatus, DOC_STATUS_LABEL } from 'utils/constants';
 

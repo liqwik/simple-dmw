@@ -1,3 +1,4 @@
+import React from 'react';
 import { PrinterOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 

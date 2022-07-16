@@ -1,3 +1,5 @@
+import React from 'react';
+
 const DescriptionItem: React.FC<any> = ({ title, content, ...props }) => {
   return (
     <div className="description-wrapper" {...props}>

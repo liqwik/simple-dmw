@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Pagination, Radio, Row, Space } from 'antd';
+import { Card, Col, Pagination, Radio, Row } from 'antd';
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import AppRoute from 'utils/AppRoute';
@@ -15,7 +15,7 @@ import {
 import { DocumentList } from './List';
 import { selectDocument } from './slice/selectors';
 import { useDocumentSlice } from './slice';
-import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import DocumentDetail from './components/Detail';
 import moment from 'moment';
 import DocCardList from './DocCardList';
@@ -26,7 +26,6 @@ interface Props {
 }
 
 export function DocumentPage({ location }: Props) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { actions } = useDocumentSlice();
   const { items, totalItem, serviceError, isLoading } = useSelector(
