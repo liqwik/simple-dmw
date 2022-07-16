@@ -1,0 +1,163 @@
+@import '~antd/dist/antd.css';
+
+body {
+  margin: 0;
+  font-family: 'Battambang', 'Open Sans', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  display: inline-block;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  margin: 16px 0;
+}
+
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
+}
+
+.site-form-item-icon {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.description-wrapper {
+  color: rgba(0, 0, 0, 1);
+  font-size: 14px;
+  line-height: 1em;
+}
+
+[data-theme='compact'] .description-wrapper {
+  font-size: 12px;
+  line-height: 1.66667;
+}
+
+.ant-drawer-body p.site-description-item-profile-p {
+  display: block;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  line-height: 1.5715;
+  font-weight: bold;
+}
+
+[data-theme='compact'] .ant-drawer-body p.site-description-item-profile-p {
+  font-size: 14px;
+  line-height: 1.66667;
+}
+
+.item-headline {
+  display: block;
+  color: #333;
+  font-size: 13px;
+  margin-bottom: 8px;
+  line-height: 0.85em;
+}
+
+.item-label {
+  color: rgba(0, 0, 0, 1);
+  font-weight: bold;
+  line-height: 1.5715;
+}
+
+[data-theme='dark'] .site-description-item-profile-p {
+  color: rgba(255, 255, 255, 0.85);
+}
+[data-theme='dark'] .description-wrapper {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.doc-row-normal {
+  background-color: #bae7ff;
+}
+
+.doc-row-signature {
+  background-color: #d9f7be;
+}
+
+.doc-row-urgent {
+  background-color: #ffccc7;
+}
+
+.preview-page-wrapper {
+  width: 100%;
+  height: 100vh;
+}
+
+.popover-sign {
+  max-width: 360px;
+  width: 100%;
+}
+
+.doc-table table {
+  border-collapse: collapse;
+}
+
+.doc-table thead,
+.doc-table thead tr {
+  border: 1px solid #999;
+}
+
+.doc-table
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > thead
+  > tr
+  > th {
+  border-color: #999;
+}
+
+.doc-table .ant-table-thead > tr > th {
+  border-color: #999;
+}
+
+.doc-table .ant-table-thead > tr > th.no-border-right {
+  border-right-color: #f0f0f0 !important;
+}
+
+.btn-action {
+  color: black !important;
+  display: block;
+  text-align: center;
+}
+
+.btn-action > span {
+  vertical-align: middle;
+}
+
+.circle-badge {
+  width: 4px;
+  height: 4px;
+  background-color: #ababab;
+  border-radius: 50%;
+}
