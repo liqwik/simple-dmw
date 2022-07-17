@@ -1,3 +1,28 @@
 {
-  "title": "welcome"
+  "title": "welcome",
+  "languages": "Langauges",
+  "appName": "Document Management Workflow",
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "report": "Report",
+  "create": "Create",
+  "edit": "Edit",
+  "delete": "Delete",
+  "list": "List",
+  "search": "Search",
+  "filter": "Filter",
+  "userProfile": "User Profile",
+  "doc": {
+    "mgmt": "Document",
+    "type": "Document Type"
+  },
+  "receiverDoc": "Receiver",
+  "receiverDate": "Receiver Date",
+  "refData": "Reference Data",
+  "account": "Account",
+  "user": "User",
+  "internalUser": "Internal User",
+  "institution": "Institution",
+  "monthly": "Monthly",
+  "yearly": "Yearly"
 }
