@@ -12,6 +12,7 @@ import { NavLink } from 'react-router-dom';
 import Text from 'antd/lib/typography/Text';
 import { AppStorage } from 'utils';
 import { Menu } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const { SubMenu } = Menu;
 
@@ -26,38 +27,39 @@ type MenuType = {
 };
 
 function SideBarMenuData({ theme }) {
+  const { t } = useTranslation();
   const isAdmin = AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin;
 
   const [menuData] = useState<MenuType[]>([
     {
       key: 'dashboard',
-      label: 'របាយការណ៍សង្ខេប',
+      label: 'dashboard',
       linkTo: AppRoute.dashboard,
       hide: !isAdmin,
       icon: <DashboardTwoTone />,
     },
     {
       key: 'document',
-      label: 'គ្រប់គ្រងឯកសារ',
+      label: 'doc.mgmt',
       linkTo: AppRoute.document,
       icon: <FileTextTwoTone />,
     },
     {
       key: 'report',
-      label: 'របាយការណ៍',
+      label: 'report',
       disabled: true,
       hide: !isAdmin,
       icon: <DashboardTwoTone />,
       children: [
         {
           key: 'monthly',
-          label: 'ប្រចាំខែ',
+          label: 'monthly',
           linkTo: AppRoute.institution,
           icon: <GoldTwoTone />,
         },
         {
           key: 'yearly',
-          label: 'ប្រចាំឆ្នាំ',
+          label: 'yearly',
           linkTo: AppRoute.docType,
           icon: <TagTwoTone />,
         },
@@ -65,19 +67,19 @@ function SideBarMenuData({ theme }) {
     },
     {
       key: 'ref-data',
-      label: 'ទិន្នន័យយោង',
+      label: 'refData',
       hide: !isAdmin,
       icon: <BuildTwoTone />,
       children: [
         {
           key: 'institution',
-          label: 'អង្គភាព/ស្ថាប័ន',
+          label: 'institution',
           linkTo: AppRoute.institution,
           icon: <GoldTwoTone />,
         },
         {
           key: 'doc-type',
-          label: 'ប្រភេទឯកសារ',
+          label: 'doc.type',
           linkTo: AppRoute.docType,
           icon: <TagTwoTone />,
         },
@@ -85,19 +87,19 @@ function SideBarMenuData({ theme }) {
     },
     {
       key: 'user-management',
-      label: 'គណនី',
+      label: 'account',
       hide: !isAdmin,
       icon: <CrownTwoTone />,
       children: [
         {
           key: 'user',
-          label: 'មន្ត្រីអង្គភាព',
+          label: 'user',
           linkTo: AppRoute.user,
           icon: <CrownTwoTone />,
         },
         {
           key: 'internal-user',
-          label: 'អ្នកប្រើប្រាស់ប្រព័ន្ធ',
+          label: 'internalUser',
           linkTo: AppRoute.internalUser,
           hide: !isAdmin,
           icon: <CrownTwoTone />,
@@ -116,7 +118,7 @@ function SideBarMenuData({ theme }) {
             <SubMenu
               key={menu.key}
               icon={menu.icon}
-              title={menu.label}
+              title={t(menu.label)}
               disabled={menu.disabled || false}
             >
               {renderMenu(menu.children)}
@@ -130,12 +132,12 @@ function SideBarMenuData({ theme }) {
             disabled={menu.disabled || false}
             icon={menu.icon}
           >
-            <Text disabled={menu.disabled || false}>{menu.label}</Text>
+            <Text disabled={menu.disabled || false}>{t(menu.label)}</Text>
             <NavLink to={menu.linkTo || '/'} activeClassName="active" />
           </Menu.Item>
         );
       }),
-    [],
+    [t],
   );
 
   return (
