@@ -1,6 +1,7 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Space } from 'antd';
 import { HeaderAvatar } from 'app/components/UI/GlobalHeader/HeaderAvatar';
+import SwitchLanguage from 'app/features/SwitchLanguage/SwitchLanguage';
 
 const { Header } = Layout;
 
@@ -15,7 +16,12 @@ export function AppHeader() {
         padding: '0 24px',
       }}
     >
-      <HeaderAvatar />
+      <Row justify="end">
+        <Space size="large">
+          <SwitchLanguage />
+          <HeaderAvatar />
+        </Space>
+      </Row>
     </Header>
   );
 }
