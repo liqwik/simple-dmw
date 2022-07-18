@@ -7,11 +7,7 @@ import { ITEM_LIMIT } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { DocumentList } from './List';
 import { selectDocument } from './slice/selectors';
 import { useDocumentSlice } from './slice';
@@ -28,9 +24,7 @@ interface Props {
 export function DocumentPage({ location }: Props) {
   const dispatch = useDispatch();
   const { actions } = useDocumentSlice();
-  const { items, totalItem, serviceError, isLoading } = useSelector(
-    selectDocument,
-  );
+  const { items, totalItem, serviceError, isLoading } = useSelector(selectDocument);
 
   const { path } = useRouteMatch();
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.document });
@@ -44,9 +38,7 @@ export function DocumentPage({ location }: Props) {
     page: qs.get('page') || 1,
   });
   const [itemDetail, setItemDetail] = useState(null);
-  const [viewMode, setViewMode] = useState(
-    localStorage.getItem('viewMode') || 'list',
-  );
+  const [viewMode, setViewMode] = useState(localStorage.getItem('viewMode') || 'list');
 
   useEffect(() => {
     const { q, fq } = filterQuery;
@@ -105,9 +97,7 @@ export function DocumentPage({ location }: Props) {
   const handleFilter = values => {
     if (hasFieldFilter(values)) {
       if (values.docDateRange) {
-        values['docStart'] = moment(values.docDateRange[0])
-          .startOf('day')
-          .unix();
+        values['docStart'] = moment(values.docDateRange[0]).startOf('day').unix();
         values['docEnd'] = moment(values.docDateRange[1]).endOf('day').unix();
 
         delete values.docDateRange;
@@ -223,11 +213,7 @@ export function DocumentPage({ location }: Props) {
         )}
       </Row>
 
-      <DocumentDetail
-        item={itemDetail}
-        visible={!!itemDetail}
-        onClose={handleCloseDetail}
-      />
+      <DocumentDetail item={itemDetail} visible={!!itemDetail} onClose={handleCloseDetail} />
     </BaseCRUDWrapper>
   );
 }

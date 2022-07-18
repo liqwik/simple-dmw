@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  QuestionCircleOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from '@ant-design/icons';
+import { QuestionCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
 

@@ -14,11 +14,7 @@ import { ITEM_LIMIT } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { DocTypeForm } from './Form';
 import { useForm } from 'antd/lib/form/Form';
 
@@ -40,14 +36,7 @@ export function DocTypePage({ location }: Props) {
 
   const dispatch = useDispatch();
   const { actions } = useDocTypeSlice();
-  const {
-    items,
-    totalItem,
-    serviceError,
-    validationErrors,
-    isSubmitting,
-    isLoading,
-  } = useSelector(selectDocType);
+  const { items, totalItem, serviceError, validationErrors, isSubmitting, isLoading } = useSelector(selectDocType);
 
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.docType });
   const [form] = useForm();
@@ -135,11 +124,7 @@ export function DocTypePage({ location }: Props) {
   };
 
   return (
-    <BaseCRUDWrapper
-      pageTitle="គ្រប់គ្រងប្រភេទឯកសារ"
-      refreshRoute={AppRoute.docType}
-      serviceError={serviceError}
-    >
+    <BaseCRUDWrapper pageTitle="គ្រប់គ្រងប្រភេទឯកសារ" refreshRoute={AppRoute.docType} serviceError={serviceError}>
       <Row gutter={[16, 16]}>
         <Col span={8}>
           <Card bordered={false}>

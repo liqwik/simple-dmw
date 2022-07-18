@@ -1,6 +1,6 @@
 import { DOC_STATUS } from 'utils/constants';
 
-const TableRowClassName = (record, idx) => {
+const TableRowClassName = (record, _idx) => {
   const { docStatus } = record;
 
   if (docStatus === DOC_STATUS.normal) {

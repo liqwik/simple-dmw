@@ -18,11 +18,7 @@ function MarkAsCover({ originalNode, file, onMarkAsCover }: any) {
     <MarkAsCoverWrapper>
       <div>{originalNode}</div>
 
-      <Button
-        size="small"
-        type={isMarkAsCover() ? 'primary' : 'default'}
-        onClick={() => onMarkAsCover(file)}
-      >
+      <Button size="small" type={isMarkAsCover() ? 'primary' : 'default'} onClick={() => onMarkAsCover(file)}>
         Mark as cover
       </Button>
     </MarkAsCoverWrapper>

@@ -9,13 +9,7 @@ type UserDropdownProps = {
   onLoadmore?: (e) => void;
 };
 
-function UserDropdown({
-  name,
-  placeholder,
-  items,
-  isLoading,
-  onLoadmore,
-}: UserDropdownProps) {
+function UserDropdown({ name, placeholder, items, isLoading, onLoadmore }: UserDropdownProps) {
   return (
     <Form.Item name={name} noStyle>
       <Select

@@ -1,11 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import {
-  AppContent,
-  AppHeader,
-  AppSidebar,
-  AppFooter,
-} from 'app/components/UI/Layout';
+import { AppContent, AppHeader, AppSidebar, AppFooter } from 'app/components/UI/Layout';
 
 function MainLayout() {
   return (

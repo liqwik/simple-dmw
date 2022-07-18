@@ -1,7 +1,9 @@
 import React from 'react';
-import { Footer } from 'antd/lib/layout/layout';
+import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { translations } from 'locales/translations';
+
+const { Footer } = Layout;
 
 export function AppFooter() {
   const { t } = useTranslation();
@@ -10,7 +12,9 @@ export function AppFooter() {
 
   return (
     <Footer style={{ textAlign: 'center' }}>
-      {t(translations.appName)} © {getFullYear()}
+      <>
+        {t(translations.appName)} © {getFullYear()}
+      </>
     </Footer>
   );
 }

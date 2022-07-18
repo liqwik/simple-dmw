@@ -10,20 +10,13 @@ import TableActionMenu from './components/TableActionMenu';
 import DocStatus from './components/DocStatus';
 import SignRemark from './components/SignRemark';
 
-export function DocumentList({
-  items,
-  loading,
-  pagination,
-  onViewDetail,
-  onPageChange,
-  onPrintDoc,
-}) {
+export function DocumentList({ items, loading, pagination, onViewDetail, onPageChange, onPrintDoc }) {
   const columns: ColumnsType<any> = [
     {
       title: <Text strong>ល.រ</Text>,
       align: 'center',
       width: 56,
-      render: (e, record, idx) => {
+      render: (_e, _record, idx) => {
         const { current, pageSize } = pagination;
         const numRange = current * pageSize;
         const num = numRange - (numRange / current - (idx + 1));
@@ -37,7 +30,7 @@ export function DocumentList({
       key: 'id',
       align: 'center',
       width: 120,
-      render: (e, record) => <DocStatus value={record.docStatus} />,
+      render: (_e, record) => <DocStatus value={record.docStatus} />,
     },
     {
       title: (
@@ -50,7 +43,7 @@ export function DocumentList({
       key: 'id',
       align: 'center',
       width: 220,
-      render: (e, record) => {
+      render: (_e, record) => {
         const { institutionId } = record;
 
         return (
@@ -79,7 +72,7 @@ export function DocumentList({
           align: 'center',
           width: 100,
           className: 'no-border-right',
-          render: (e, record) => {
+          render: (_e, record) => {
             const { docIn } = record;
 
             return (
@@ -100,9 +93,7 @@ export function DocumentList({
           align: 'center',
           width: 100,
           className: 'no-border-right',
-          render: (e, record) => (
-            <DisplayUserName user={record.docIn?.sender} />
-          ),
+          render: (_e, record) => <DisplayUserName user={record.docIn?.sender} />,
         },
         {
           title: <Text strong>អ្នកទទួល</Text>,
@@ -110,9 +101,7 @@ export function DocumentList({
           key: 'docIn.receiver',
           align: 'center',
           width: 100,
-          render: (e, record) => (
-            <DisplayUserName user={record.docIn?.receiver} />
-          ),
+          render: (_e, record) => <DisplayUserName user={record.docIn?.receiver} />,
         },
       ],
     },
@@ -128,7 +117,7 @@ export function DocumentList({
           align: 'center',
           width: 100,
           className: 'no-border-right',
-          render: (e, record) => {
+          render: (_e, record) => {
             const { docOut } = record;
             return (
               <Text type="secondary" style={{ fontSize: '13px' }}>
@@ -144,9 +133,7 @@ export function DocumentList({
           align: 'center',
           width: 100,
           className: 'no-border-right',
-          render: (e, record) => (
-            <DisplayUserName user={record.docOut?.sender} />
-          ),
+          render: (_e, record) => <DisplayUserName user={record.docOut?.sender} />,
         },
         {
           title: <Text strong>អ្នកទទួល</Text>,
@@ -154,9 +141,7 @@ export function DocumentList({
           key: 'docOut.receiver',
           align: 'center',
           width: 100,
-          render: (e, record) => (
-            <DisplayUserName user={record.docOut?.receiver} />
-          ),
+          render: (_e, record) => <DisplayUserName user={record.docOut?.receiver} />,
         },
       ],
     },
@@ -167,7 +152,7 @@ export function DocumentList({
       dataIndex: 'signDate',
       key: 'signDate',
       width: 64,
-      render: (e, record) => {
+      render: (_e, record) => {
         const { isSign, signRemark, signDate } = record;
 
         return isSign && <SignRemark remark={signRemark} date={signDate} />;
@@ -180,12 +165,10 @@ export function DocumentList({
       align: 'center',
       width: 110,
       fixed: 'right',
-      render: (e, record) => {
+      render: (_e, record) => {
         return (
           <TableActionMenu
-            onPrintDoc={() =>
-              onPrintDoc({ filePath: `${ApiRoute.document(record.id)}/export` })
-            }
+            onPrintDoc={() => onPrintDoc({ filePath: `${ApiRoute.document(record.id)}/export` })}
             editRoute={`${AppRoute.document}/edit/${record.id}`}
             downloadSrc={`${ApiRoute.document(record.id)}/export`}
           />

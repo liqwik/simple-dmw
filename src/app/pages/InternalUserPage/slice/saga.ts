@@ -6,12 +6,10 @@ import { internalUserActions as actions } from '.';
 
 function* getList(action) {
   try {
-    const result = yield call(() =>
-      internalUserService.getAll(ObjectUtil.cleanObjectValue(action.payload)),
-    );
+    const result = yield call(() => internalUserService.getAll(ObjectUtil.cleanObjectValue(action.payload)));
 
     yield put(actions.getListSuccess(result));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getListFail(err.data.msg || err.data),
@@ -21,12 +19,10 @@ function* getList(action) {
 
 function* getDetail(action) {
   try {
-    const result = yield call(() =>
-      internalUserService.getDetail(action.payload),
-    );
+    const result = yield call(() => internalUserService.getDetail(action.payload));
 
     yield put(actions.getDetailSuccess(result));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getDetailFail(err.data.msg || err.data),
@@ -36,12 +32,10 @@ function* getDetail(action) {
 
 function* getTotalItem(action) {
   try {
-    const data = yield call(() =>
-      internalUserService.count(ObjectUtil.cleanObjectValue(action.payload)),
-    );
+    const data = yield call(() => internalUserService.count(ObjectUtil.cleanObjectValue(action.payload)));
 
     yield put(actions.getTotalItem(data.total));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getListFail(err.data.msg || err.data),
@@ -54,7 +48,7 @@ function* add(action) {
     const data = yield call(() => internalUserService.create(action.payload));
 
     yield put(actions.addOne(data));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),
@@ -64,12 +58,10 @@ function* add(action) {
 
 function* update(action) {
   try {
-    yield call(() =>
-      internalUserService.update(action.payload.id, action.payload),
-    );
+    yield call(() => internalUserService.update(action.payload.id, action.payload));
 
     yield put(actions.updateOne(action.payload));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),

@@ -13,12 +13,6 @@ export const MySearchField = ({ value, onChange, onSearch }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <Search
-      placeholder={t(translations.search)}
-      enterButton
-      value={value}
-      onChange={onChange}
-      onSearch={onSearch}
-    />
+    <Search placeholder={t(translations.search)} enterButton value={value} onChange={onChange} onSearch={onSearch} />
   );
 };

@@ -2,14 +2,7 @@ import React from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Table, Button, Popconfirm } from 'antd';
 
-export function InstitutionList({
-  items,
-  loading,
-  pagination,
-  onPageChange,
-  onSelectRow,
-  onRemove,
-}) {
+export function InstitutionList({ items, loading, pagination, onPageChange, onSelectRow, onRemove }) {
   return (
     <Table
       bordered

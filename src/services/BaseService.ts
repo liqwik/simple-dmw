@@ -22,33 +22,21 @@ class BaseService {
           ...params,
         },
       });
-    } catch (err) {
+    } catch (err: any) {
       return err;
     }
   }
 
   async count(params) {
-    try {
-      return await this.http.get(`${this.route}/c`, { params });
-    } catch (err) {
-      throw err;
-    }
+    return await this.http.get(`${this.route}/c`, { params });
   }
 
   async getDetail(id) {
-    try {
-      return await this.http.get(`${this.route}/${id}`);
-    } catch (err) {
-      throw err;
-    }
+    return await this.http.get(`${this.route}/${id}`);
   }
 
   async create(data) {
-    try {
-      return await this.http.post(this.route, data);
-    } catch (err) {
-      throw err;
-    }
+    return await this.http.post(this.route, data);
   }
 
   async update(id, data) {

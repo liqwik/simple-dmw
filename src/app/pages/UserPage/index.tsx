@@ -6,11 +6,7 @@ import { ITEM_LIMIT } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { UserList } from './List';
 import { selectUser } from './slice/selectors';
 import { useUserSlice } from './slice';
@@ -36,14 +32,7 @@ export function UserPage({ location }: Props) {
 
   const dispatch = useDispatch();
   const { actions } = useUserSlice();
-  const {
-    items,
-    totalItem,
-    serviceError,
-    validationErrors,
-    isSubmitting,
-    isLoading,
-  } = useSelector(selectUser);
+  const { items, totalItem, serviceError, validationErrors, isSubmitting, isLoading } = useSelector(selectUser);
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.user });
 
   useEffect(() => {
@@ -129,11 +118,7 @@ export function UserPage({ location }: Props) {
   };
 
   return (
-    <BaseCRUDWrapper
-      pageTitle="មន្ត្រីអង្គភាព"
-      refreshRoute={AppRoute.user}
-      serviceError={serviceError}
-    >
+    <BaseCRUDWrapper pageTitle="មន្ត្រីអង្គភាព" refreshRoute={AppRoute.user} serviceError={serviceError}>
       <Row gutter={[16, 16]}>
         <Col span={8}>
           <Card bordered={false}>

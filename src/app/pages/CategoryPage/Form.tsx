@@ -1,14 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Col,
-  Row,
-  Input,
-  Button,
-  InputNumber,
-  Form,
-  Space,
-  Switch,
-} from 'antd';
+import { Col, Row, Input, Button, InputNumber, Form, Space, Switch } from 'antd';
 import { SingleUpload } from 'app/components/Uploader';
 
 interface IFormProps {
@@ -21,15 +12,7 @@ interface IFormProps {
   onReset?: any;
 }
 
-export function CategoryForm({
-  form,
-  initialValue,
-  loading,
-  editData,
-  validateErrors,
-  onReset,
-  onSubmit,
-}: IFormProps) {
+export function CategoryForm({ form, initialValue, loading, editData, validateErrors, onReset, onSubmit }: IFormProps) {
   /** Mounting & Updating */
   useEffect(() => {
     if (validateErrors && validateErrors.length > 0) {
@@ -52,12 +35,7 @@ export function CategoryForm({
   };
 
   return (
-    <Form
-      layout="vertical"
-      form={form}
-      initialValues={initialValue}
-      onFinish={onSubmit}
-    >
+    <Form layout="vertical" form={form} initialValues={initialValue} onFinish={onSubmit}>
       <Row gutter={16}>
         <Col span={24}>
           <Form.Item
@@ -77,10 +55,7 @@ export function CategoryForm({
             <Input type="hidden" />
           </Form.Item>
 
-          <SingleUpload
-            onUpload={handleUpload}
-            imgSrc={editData && editData.imgUrl}
-          />
+          <SingleUpload onUpload={handleUpload} imgSrc={editData && editData.imgUrl} />
 
           <Form.Item name="active" valuePropName="checked">
             <Switch checkedChildren="Active" unCheckedChildren="Deactive" />

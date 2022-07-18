@@ -4,14 +4,7 @@ import { Table, Button, Popconfirm, Image, Space, Tag } from 'antd';
 import { ImageUtil } from 'utils/imageUtil';
 import Text from 'antd/lib/typography/Text';
 
-export function CategoryList({
-  categories,
-  loading,
-  pagination,
-  onPageChange,
-  onSelectRow,
-  onRemove,
-}) {
+export function CategoryList({ categories, loading, pagination, onPageChange, onSelectRow, onRemove }) {
   return (
     <Table
       bordered
@@ -36,20 +29,15 @@ export function CategoryList({
         {
           title: 'Name',
           dataIndex: 'name',
-          render: (e, record) => {
+          render: (_e, record) => {
             const names = record.name;
 
-            const categoryTags = names.map((name, idx) => (
-              <Tag key={idx}>{name}</Tag>
-            ));
+            const categoryTags = names.map((name, idx) => <Tag key={idx}>{name}</Tag>);
 
             return (
               <>
                 <Space align="start">
-                  <Image
-                    width={72}
-                    src={ImageUtil.getImageThumbnail(record.imgUrl, 'w_200')}
-                  />
+                  <Image width={72} src={ImageUtil.getImageThumbnail(record.imgUrl, 'w_200')} />
                   <div>
                     {categoryTags}
                     <br />
@@ -83,7 +71,7 @@ export function CategoryList({
             },
           ],
           filterMultiple: false,
-          render: (e, record) => {
+          render: (_e, record) => {
             if (record.active) {
               return <Tag color="blue">Active</Tag>;
             }
@@ -95,11 +83,11 @@ export function CategoryList({
           title: 'Action',
           width: '160px',
           align: 'center',
-          render: (e, record) => (
+          render: (_e, record) => (
             <span>
               <Button
                 type="link"
-                onClick={e => {
+                onClick={_e => {
                   onSelectRow(record);
                 }}
               >

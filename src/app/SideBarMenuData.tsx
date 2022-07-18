@@ -115,23 +115,14 @@ function SideBarMenuData({ theme }) {
 
         if (menu.children) {
           return (
-            <SubMenu
-              key={menu.key}
-              icon={menu.icon}
-              title={t(menu.label)}
-              disabled={menu.disabled || false}
-            >
+            <SubMenu key={menu.key} icon={menu.icon} title={t(menu.label)} disabled={menu.disabled || false}>
               {renderMenu(menu.children)}
             </SubMenu>
           );
         }
 
         return (
-          <Menu.Item
-            key={menu.key}
-            disabled={menu.disabled || false}
-            icon={menu.icon}
-          >
+          <Menu.Item key={menu.key} disabled={menu.disabled || false} icon={menu.icon}>
             <Text disabled={menu.disabled || false}>{t(menu.label)}</Text>
             <NavLink to={menu.linkTo || '/'} activeClassName="active" />
           </Menu.Item>

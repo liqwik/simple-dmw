@@ -32,20 +32,13 @@ export function InstitutionForm({
   }, [form, editData, validateErrors]);
 
   return (
-    <Form
-      layout="vertical"
-      form={form}
-      initialValues={initialValue}
-      onFinish={onSubmit}
-    >
+    <Form layout="vertical" form={form} initialValues={initialValue} onFinish={onSubmit}>
       <Row gutter={16}>
         <Col span={24}>
           <Form.Item
             label="ឈ្មោះអង្គភាព/ស្ថាប័ន"
             name="name"
-            rules={[
-              { required: true, message: 'Please input institution name' },
-            ]}
+            rules={[{ required: true, message: 'Please input institution name' }]}
           >
             <Input placeholder="បញ្ចូលឈ្មោះអង្គភាព/ស្ថាប័ន" />
           </Form.Item>

@@ -14,28 +14,22 @@ const columns = [
       {
         title: 'ឯកសារធម្មតា',
         dataIndex: 'totalDoc.signed.normal',
-        render: (e, record) => (
-          <Text>{record?.totalDoc?.signed?.normal || 0}</Text>
-        ),
+        render: (_e, record) => <Text>{record?.totalDoc?.signed?.normal || 0}</Text>,
       },
       {
         title: 'ប្រញាប់',
         dataIndex: 'totalDoc.signed.urgent',
-        render: (e, record) => (
-          <Text>{record?.totalDoc?.signed?.urgent || 0}</Text>
-        ),
+        render: (_e, record) => <Text>{record?.totalDoc?.signed?.urgent || 0}</Text>,
       },
       {
         title: 'ឯកសារបានចាររួច',
         dataIndex: 'totalDoc.signed.signature',
-        render: (e, record) => (
-          <Text>{record?.totalDoc?.signed?.signature || 0}</Text>
-        ),
+        render: (_e, record) => <Text>{record?.totalDoc?.signed?.signature || 0}</Text>,
       },
       {
         title: <Text strong>ចំនួនលិខិតសរុប</Text>,
         dataIndex: 'id',
-        render: (e, record) => {
+        render: (_e, record) => {
           let total = 0;
           total += record?.totalDoc?.signed?.normal || 0;
           total += record?.totalDoc?.signed?.urgent || 0;
@@ -52,28 +46,22 @@ const columns = [
       {
         title: 'ឯកសារធម្មតា',
         dataIndex: 'totalDoc.not_sign.normal',
-        render: (e, record) => (
-          <Text>{record?.totalDoc?.not_sign?.normal || 0}</Text>
-        ),
+        render: (_e, record) => <Text>{record?.totalDoc?.not_sign?.normal || 0}</Text>,
       },
       {
         title: 'ប្រញាប់',
         dataIndex: 'totalDoc.not_sign.urgent',
-        render: (e, record) => (
-          <Text>{record?.totalDoc?.not_sign?.urgent || 0}</Text>
-        ),
+        render: (_e, record) => <Text>{record?.totalDoc?.not_sign?.urgent || 0}</Text>,
       },
       {
         title: 'ឯកសារបានចាររួច',
         dataIndex: 'totalDoc.not_sign.signature',
-        render: (e, record) => (
-          <Text>{record?.totalDoc?.not_sign?.signature || 0}</Text>
-        ),
+        render: (_e, record) => <Text>{record?.totalDoc?.not_sign?.signature || 0}</Text>,
       },
       {
         title: <Text strong>ចំនួនលិខិតសរុប</Text>,
         dataIndex: 'id',
-        render: (e, record) => {
+        render: (_e, record) => {
           let total = 0;
           total += record?.totalDoc?.not_sign?.normal || 0;
           total += record?.totalDoc?.not_sign?.urgent || 0;
@@ -96,12 +84,12 @@ function DocTypeReport({ data }) {
       pagination={false}
       bordered
       summary={pageData => {
-        let signed = {
+        const signed = {
           normal: 0,
           urgent: 0,
           signature: 0,
         };
-        let notSign = {
+        const notSign = {
           normal: 0,
           urgent: 0,
           signature: 0,
@@ -142,9 +130,7 @@ function DocTypeReport({ data }) {
                 <Text>{notSign.signature}</Text>
               </Table.Summary.Cell>
               <Table.Summary.Cell index={9}>
-                <Text>
-                  {notSign.normal + notSign.urgent + notSign.signature}
-                </Text>
+                <Text>{notSign.normal + notSign.urgent + notSign.signature}</Text>
               </Table.Summary.Cell>
             </Table.Summary.Row>
           </>

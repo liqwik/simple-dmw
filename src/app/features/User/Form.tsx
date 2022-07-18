@@ -36,13 +36,7 @@ export function UserForm({
 
   return (
     <>
-      <Form
-        layout="vertical"
-        form={form}
-        initialValues={initialValue}
-        onFinish={onSubmit}
-        {...props}
-      >
+      <Form layout="vertical" form={form} initialValues={initialValue} onFinish={onSubmit} {...props}>
         <Row gutter={16}>
           <Col span={24}>
             <MyTextInput
@@ -67,22 +61,14 @@ export function UserForm({
               ]}
             />
 
-            <MyTextInput
-              label="លេខទូរស័ព្ទ"
-              name="ph"
-              placeholder="010876543"
-            />
+            <MyTextInput label="លេខទូរស័ព្ទ" name="ph" placeholder="010876543" />
 
             <MySelect label="ភេទ" name="sex" placeholder="ជ្រើសរើសភេទ">
               <MySelect.Option value="m">ប្រុស</MySelect.Option>
               <MySelect.Option value="f">ស្រី</MySelect.Option>
             </MySelect>
 
-            <MySelect
-              label="ប្រភេទមន្ត្រី"
-              name="userType"
-              placeholder="ជ្រើសរើសប្រភេទមន្ត្រី"
-            >
+            <MySelect label="ប្រភេទមន្ត្រី" name="userType" placeholder="ជ្រើសរើសប្រភេទមន្ត្រី">
               <MySelect.Option value="assistant">ក្រុមជំនួយការ</MySelect.Option>
               <MySelect.Option value="other">ផ្សេងៗ</MySelect.Option>
             </MySelect>

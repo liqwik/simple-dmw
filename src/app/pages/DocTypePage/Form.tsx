@@ -11,15 +11,7 @@ interface IFormProps {
   onReset?: any;
 }
 
-export function DocTypeForm({
-  form,
-  initialValue,
-  loading,
-  editData,
-  validateErrors,
-  onReset,
-  onSubmit,
-}: IFormProps) {
+export function DocTypeForm({ form, initialValue, loading, editData, validateErrors, onReset, onSubmit }: IFormProps) {
   /** Mounting & Updating */
   useEffect(() => {
     if (validateErrors && validateErrors.length > 0) {
@@ -32,12 +24,7 @@ export function DocTypeForm({
   }, [form, editData, validateErrors]);
 
   return (
-    <Form
-      layout="vertical"
-      form={form}
-      initialValues={initialValue}
-      onFinish={onSubmit}
-    >
+    <Form layout="vertical" form={form} initialValues={initialValue} onFinish={onSubmit}>
       <Row gutter={16}>
         <Col span={24}>
           <Form.Item
@@ -48,11 +35,7 @@ export function DocTypeForm({
             <Input placeholder="បញ្ចូលឈ្មោះប្រភេទឯកសារ" />
           </Form.Item>
 
-          <Form.Item
-            label="លេខកូដ"
-            name="code"
-            rules={[{ required: true, message: 'Please input docType name' }]}
-          >
+          <Form.Item label="លេខកូដ" name="code" rules={[{ required: true, message: 'Please input docType name' }]}>
             <Input placeholder="លេខកូដ" />
           </Form.Item>
         </Col>

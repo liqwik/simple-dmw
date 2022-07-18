@@ -17,19 +17,19 @@ const slice = createSlice({
   name: 'category',
   initialState,
   reducers: {
-    getListAction(state, action?: PayloadAction<any>) {
+    getListAction(state, _action?: PayloadAction<any>) {
       state.isLoading = true;
     },
-    getTotalItemAction(state, action?: PayloadAction<any>) {},
-    addAction(state, action: PayloadAction<any>) {
-      state.isLoading = true;
-      state.isSubmitting = true;
-    },
-    updateAction(state, action: PayloadAction<any>) {
+    getTotalItemAction(_state, _action?: PayloadAction<any>) {},
+    addAction(state, _action: PayloadAction<any>) {
       state.isLoading = true;
       state.isSubmitting = true;
     },
-    removeAction(state, action: PayloadAction<any>) {
+    updateAction(state, _action: PayloadAction<any>) {
+      state.isLoading = true;
+      state.isSubmitting = true;
+    },
+    removeAction(state, _action: PayloadAction<any>) {
       state.isLoading = true;
     },
     failure(state, action: PayloadAction<any>) {

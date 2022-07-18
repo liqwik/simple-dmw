@@ -11,16 +11,7 @@ type IMyFormProps = {
 };
 
 export const MyForm = React.forwardRef(
-  (
-    {
-      initialValues,
-      children,
-      onFinish,
-      onFinishFailed,
-      ...props
-    }: IMyFormProps,
-    ref,
-  ) => {
+  ({ initialValues, children, onFinish, onFinishFailed, ...props }: IMyFormProps) => {
     const handleFinishFailed = info => {
       alert(JSON.stringify(info));
       if (onFinishFailed) {
@@ -29,12 +20,7 @@ export const MyForm = React.forwardRef(
     };
 
     return (
-      <Form
-        initialValues={initialValues}
-        onFinish={onFinish}
-        onFinishFailed={handleFinishFailed}
-        {...props}
-      >
+      <Form initialValues={initialValues} onFinish={onFinish} onFinishFailed={handleFinishFailed} {...props}>
         {children}
       </Form>
     );

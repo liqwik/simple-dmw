@@ -14,14 +14,7 @@ import { ApiRoute } from 'utils';
 
 const { Text } = Typography;
 
-function DocCardList({
-  item,
-  loading,
-  pagination,
-  onViewDetail,
-  onPageChange,
-  onPrintDoc,
-}) {
+function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, onPrintDoc }) {
   const {
     docNo,
     docTypeId,
@@ -36,6 +29,7 @@ function DocCardList({
     docStatus,
   } = item;
 
+  console.log(loading, pagination, onPageChange);
   return (
     <Card
       size="small"
@@ -53,30 +47,16 @@ function DocCardList({
       }
       actions={[
         <EditButton key="edit" to={`${AppRoute.document}/edit/${item.id}`} />,
-        <PrintButton
-          key="print"
-          onPrint={() =>
-            onPrintDoc({ filePath: `${ApiRoute.document(item.id)}/export` })
-          }
-        />,
-        <DownloadButton
-          key="download"
-          src={`${ApiRoute.document(item.id)}/export`}
-        />,
+        <PrintButton key="print" onPrint={() => onPrintDoc({ filePath: `${ApiRoute.document(item.id)}/export` })} />,
+        <DownloadButton key="download" src={`${ApiRoute.document(item.id)}/export`} />,
       ]}
     >
       <Row>
         <Col span={16}>
-          <DescriptionItem
-            title="អង្គភាព/ស្ថាប័ន"
-            content={displayValue(institutionId && institutionId.name)}
-          />
+          <DescriptionItem title="អង្គភាព/ស្ថាប័ន" content={displayValue(institutionId && institutionId.name)} />
         </Col>
         <Col span={8}>
-          <DescriptionItem
-            title="ប្រភេទឯកសារ"
-            content={displayValue(docTypeId && docTypeId.name)}
-          />
+          <DescriptionItem title="ប្រភេទឯកសារ" content={displayValue(docTypeId && docTypeId.name)} />
         </Col>
       </Row>
 
@@ -85,15 +65,7 @@ function DocCardList({
           <DescriptionItem
             title="ស្ថានភាពឯកសារ"
             content={
-              <Tag
-                color={
-                  docStatus === 'signature'
-                    ? 'green'
-                    : docStatus === 'urgent'
-                    ? 'red'
-                    : 'blue'
-                }
-              >
+              <Tag color={docStatus === 'signature' ? 'green' : docStatus === 'urgent' ? 'red' : 'blue'}>
                 {DOC_STATUS_LABEL[docStatus]}
               </Tag>
             }
@@ -101,20 +73,13 @@ function DocCardList({
         </Col>
 
         <Col span={8}>
-          <DescriptionItem
-            title="ចំណារឯកសារ"
-            content={
-              isSign && <SignRemark remark={signRemark} date={signDate} />
-            }
-          />
+          <DescriptionItem title="ចំណារឯកសារ" content={isSign && <SignRemark remark={signRemark} date={signDate} />} />
         </Col>
         <Col span={24}>
           <DescriptionItem
             title="កម្មវត្ថុ"
             content={
-              <Paragraph
-                ellipsis={{ rows: 1, expandable: true, symbol: 'អានបន្ថែម' }}
-              >
+              <Paragraph ellipsis={{ rows: 1, expandable: true, symbol: 'អានបន្ថែម' }}>
                 {displayValue(docDescription)}
               </Paragraph>
             }
@@ -170,10 +135,7 @@ function DocCardList({
 
       <Row>
         <Col span={24}>
-          <DescriptionItem
-            title="កាលបរិច្ឆេទបញ្ចេញឯកសារ"
-            content={<DisplayDateTime value={docOut && docOut.date} />}
-          />
+          <DescriptionItem title="កាលបរិច្ឆេទបញ្ចេញឯកសារ" content={<DisplayDateTime value={docOut && docOut.date} />} />
         </Col>
         <Col span={12}>
           <DescriptionItem

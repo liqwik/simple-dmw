@@ -7,12 +7,7 @@ export function AppContent() {
   return (
     <Switch>
       {routes.map((route: any, index) => (
-        <Route
-          key={index}
-          path={route.path}
-          exact={route.exact || false}
-          component={route.component}
-        />
+        <Route key={index} path={route.path} exact={route.exact || false} component={route.component} />
       ))}
 
       <Route exact path={AppRoute.baseUrl}>

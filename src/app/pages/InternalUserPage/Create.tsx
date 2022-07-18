@@ -11,9 +11,7 @@ export function InternalUserCreate({ history }) {
 
   const dispatch = useDispatch();
   const { actions } = useInternalUserSlice();
-  const { isSubmitting, validationErrors, serviceError } = useSelector(
-    selectInternalUser,
-  );
+  const { isSubmitting, validationErrors, serviceError } = useSelector(selectInternalUser);
 
   const handleSubmit = values => {
     dispatch(actions.addAction(values));
@@ -28,8 +26,7 @@ export function InternalUserCreate({ history }) {
         validationErrors &&
         validationErrors.length > 0 &&
         validationErrors.map(err => ({
-          name:
-            err.field.split('.').length > 0 ? err.field.split('.') : err.field,
+          name: err.field.split('.').length > 0 ? err.field.split('.') : err.field,
           errors: [err.msg],
         }))
       }

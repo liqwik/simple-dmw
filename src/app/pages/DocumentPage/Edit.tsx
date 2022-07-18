@@ -13,12 +13,7 @@ export function DocumentEdit({ history }) {
 
   const dispatch = useDispatch();
   const { actions } = useDocumentSlice();
-  const {
-    itemDetail,
-    isSubmitting,
-    validationErrors,
-    serviceError,
-  } = useSelector(selectDocument);
+  const { itemDetail, isSubmitting, validationErrors, serviceError } = useSelector(selectDocument);
 
   useEffect(() => {
     dispatch(actions.getDetailAction(id));
@@ -42,8 +37,7 @@ export function DocumentEdit({ history }) {
         validationErrors &&
         validationErrors.length > 0 &&
         validationErrors.map(err => ({
-          name:
-            err.field.split('.').length > 0 ? err.field.split('.') : err.field,
+          name: err.field.split('.').length > 0 ? err.field.split('.') : err.field,
           errors: [err.msg],
         }))
       }

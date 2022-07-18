@@ -1,15 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import {
-  Button,
-  Input,
-  Checkbox,
-  Form,
-  Alert,
-  Row,
-  Col,
-  Typography,
-} from 'antd';
+import { Button, Input, Checkbox, Form, Alert, Row, Col, Typography } from 'antd';
 import { Logo } from 'app/components/UI/Icon';
 import { useLoginSlice } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,8 +29,8 @@ export default function LoginPage({ history }) {
     }
   }, [user, history]);
 
-  const handleSubmit = values => {
-    dispatch(actions.loginAction(values));
+  const handleSubmit = () => {
+    dispatch(actions.loginAction());
   };
 
   const handleSubmitFailed = errorInfo => {
@@ -55,20 +46,10 @@ export default function LoginPage({ history }) {
             <Title level={3}>ប្រព័ន្ធគ្រប់គ្រងឯកសារខេត្តកណ្តាល</Title>
 
             <br />
-            {error && (
-              <Alert
-                style={{ marginBottom: '20px' }}
-                message={error}
-                type="error"
-                showIcon
-              />
-            )}
+            {error && <Alert style={{ marginBottom: '20px' }} message={error} type="error" showIcon />}
 
             <Form onFinish={handleSubmit} onFinishFailed={handleSubmitFailed}>
-              <Form.Item
-                name="idtt"
-                rules={[{ required: true, message: 'សូមបំពេញឈ្មោះគណនី' }]}
-              >
+              <Form.Item name="idtt" rules={[{ required: true, message: 'សូមបំពេញឈ្មោះគណនី' }]}>
                 <Input
                   allowClear
                   autoFocus
@@ -86,10 +67,7 @@ export default function LoginPage({ history }) {
                   { min: 6, message: 'ពាក្យសម្ងាត់យ៉ាងតិច ៦ តួអក្សរ' },
                 ]}
               >
-                <Input.Password
-                  placeholder="ពាក្យសម្ងាត់"
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                />
+                <Input.Password placeholder="ពាក្យសម្ងាត់" prefix={<LockOutlined className="site-form-item-icon" />} />
               </Form.Item>
 
               <Form.Item>
@@ -99,12 +77,7 @@ export default function LoginPage({ history }) {
               </Form.Item>
 
               <Form.Item>
-                <Button
-                  loading={loading}
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                >
+                <Button loading={loading} type="primary" htmlType="submit" className="login-form-button">
                   ចូលប្រើប្រាស់ប្រព័ន្ធ
                 </Button>
               </Form.Item>

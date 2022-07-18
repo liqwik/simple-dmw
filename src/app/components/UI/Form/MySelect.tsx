@@ -1,14 +1,7 @@
 import React from 'react';
 import { Form, Select } from 'antd';
 
-export const MySelect = ({
-  label,
-  name,
-  children,
-  placeholder,
-  onChange,
-  ...props
-}: any) => {
+export const MySelect = ({ label, name, children, placeholder, onChange, ...props }: any) => {
   return (
     <Form.Item label={label} name={name} {...props}>
       <Select placeholder={placeholder} onChange={onChange}>

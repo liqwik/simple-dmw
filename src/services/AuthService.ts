@@ -9,11 +9,7 @@ class AuthService {
   }
 
   login({ identity, password }) {
-    try {
-      return this.http.post(ApiRoute.login, { idtt: identity, pwd: password });
-    } catch (err) {
-      throw err;
-    }
+    return this.http.post(ApiRoute.login, { idtt: identity, pwd: password });
   }
 }
 

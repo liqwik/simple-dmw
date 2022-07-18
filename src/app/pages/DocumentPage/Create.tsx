@@ -11,9 +11,7 @@ export function DocumentCreate({ history }) {
 
   const dispatch = useDispatch();
   const { actions } = useDocumentSlice();
-  const { isSubmitting, validationErrors, serviceError } = useSelector(
-    selectDocument,
-  );
+  const { isSubmitting, validationErrors, serviceError } = useSelector(selectDocument);
 
   const handleSubmit = values => {
     dispatch(actions.addAction(values));
@@ -28,8 +26,7 @@ export function DocumentCreate({ history }) {
         validationErrors &&
         validationErrors.length > 0 &&
         validationErrors.map(err => ({
-          name:
-            err.field.split('.').length > 0 ? err.field.split('.') : err.field,
+          name: err.field.split('.').length > 0 ? err.field.split('.') : err.field,
           errors: [err.msg],
         }))
       }

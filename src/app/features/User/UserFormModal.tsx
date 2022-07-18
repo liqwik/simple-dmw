@@ -27,18 +27,8 @@ export function UserFormModal({ visible, type, onResult, onCancel }: any) {
   };
 
   return (
-    <Modal
-      visible={visible}
-      footer={false}
-      destroyOnClose={true}
-      onCancel={onCancel}
-    >
-      <UserForm
-        preserve={false}
-        form={form}
-        onReset={handleReset}
-        onSubmit={handleSubmit}
-      />
+    <Modal visible={visible} footer={false} destroyOnClose={true} onCancel={onCancel}>
+      <UserForm preserve={false} form={form} onReset={handleReset} onSubmit={handleSubmit} />
     </Modal>
   );
 }

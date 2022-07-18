@@ -19,10 +19,7 @@ export default abstract class AbsClientHttp {
   }
 
   private _initializeResponseInterceptor = () => {
-    this.instance.interceptors.response.use(
-      this._handleResponse,
-      this._handleError,
-    );
+    this.instance.interceptors.response.use(this._handleResponse, this._handleError);
   };
 
   private _handleResponse = ({ data }: AxiosResponse) => data;

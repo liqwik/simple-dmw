@@ -6,11 +6,7 @@ import { ITEM_LIMIT } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { InternalUserList } from './List';
 import { selectInternalUser } from './slice/selectors';
 import { useInternalUserSlice } from './slice';
@@ -32,9 +28,7 @@ export function InternalUserPage({ location }: Props) {
 
   const dispatch = useDispatch();
   const { actions } = useInternalUserSlice();
-  const { items, totalItem, serviceError, isLoading } = useSelector(
-    selectInternalUser,
-  );
+  const { items, totalItem, serviceError, isLoading } = useSelector(selectInternalUser);
 
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.internalUser });
   const { path } = useRouteMatch();

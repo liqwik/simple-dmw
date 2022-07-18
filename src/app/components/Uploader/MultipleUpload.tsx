@@ -6,15 +6,7 @@ import { APIBase } from 'config';
 import MarkAsCover from './MarkAsCover';
 import { AppStorage } from 'utils';
 
-function MultipleUpload({
-  previewImage,
-  previewVisible,
-  files,
-  itemRender,
-  onCancel,
-  onChange,
-  onPreview,
-}: any) {
+function MultipleUpload({ previewImage, previewVisible, files, onCancel, onChange, onPreview }: any) {
   const [fileList, setFileList]: any = useState([]);
 
   useEffect(() => {
@@ -25,7 +17,7 @@ function MultipleUpload({
     if (Array.isArray(info)) {
       return info;
     }
-    let fList = [...info.fileList];
+    const fList = [...info.fileList];
 
     const newFList = fList.map(file => {
       if (file.response) {

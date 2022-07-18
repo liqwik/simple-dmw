@@ -14,11 +14,7 @@ import { ITEM_LIMIT } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { InstitutionForm } from './Form';
 import { useForm } from 'antd/lib/form/Form';
 
@@ -40,14 +36,7 @@ export function InstitutionPage({ location }: Props) {
 
   const dispatch = useDispatch();
   const { actions } = useInstitutionSlice();
-  const {
-    items,
-    totalItem,
-    serviceError,
-    validationErrors,
-    isSubmitting,
-    isLoading,
-  } = useSelector(selectInstitution);
+  const { items, totalItem, serviceError, validationErrors, isSubmitting, isLoading } = useSelector(selectInstitution);
 
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.institution });
   const [form] = useForm();

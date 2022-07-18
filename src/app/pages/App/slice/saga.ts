@@ -6,7 +6,7 @@ export function* requestHandler({ action, onSuccess, onError }) {
     const result = yield action();
 
     yield onSuccess(result);
-  } catch (err) {
+  } catch (err: any) {
     if (err.status === 401) {
       yield put(commonActions.unauthorized());
     } else if (err.status === 403) {

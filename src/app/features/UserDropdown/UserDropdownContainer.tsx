@@ -9,23 +9,15 @@ import { ITEM_LIMIT } from 'utils/constants';
 
 type UserDropdownProps = {
   name: string;
-  label: string;
+  label?: string;
   placeholder: string;
   type: string;
-  selectedValue: any;
-  onSelectedValue: (id: string) => void;
+  selectedValue?: any;
+  onSelectedValue?: (id: string) => void;
   [props: string]: any;
 };
 
-function UserDropdownContainer({
-  name,
-  label,
-  placeholder,
-  type,
-  selectedValue,
-  onSelectedValue,
-  ...props
-}: UserDropdownProps) {
+function UserDropdownContainer({ name, placeholder, type }: UserDropdownProps) {
   const [visible, setVisible] = useState(false);
   const [queryParams, setQueryParams] = useState({
     userType: type,
@@ -68,11 +60,7 @@ function UserDropdownContainer({
     e.persist();
     const target: any = e.target;
 
-    if (
-      target.scrollTop + target.offsetHeight === target.scrollHeight &&
-      !isLoading &&
-      hasNextPage
-    ) {
+    if (target.scrollTop + target.offsetHeight === target.scrollHeight && !isLoading && hasNextPage) {
       setQueryParams({ ...queryParams, page: queryParams.page + 1 });
     }
   };
@@ -87,12 +75,7 @@ function UserDropdownContainer({
       <Form.Item noStyle>
         <Row>
           <Col flex="auto">
-            <UserDropdown
-              items={users}
-              name={name}
-              placeholder={placeholder}
-              onLoadmore={handleLoadmore}
-            />
+            <UserDropdown items={users} name={name} placeholder={placeholder} onLoadmore={handleLoadmore} />
           </Col>
           <Col flex="50px">
             <Button type="primary" onClick={showForm}>
@@ -102,12 +85,7 @@ function UserDropdownContainer({
         </Row>
       </Form.Item>
 
-      <UserFormModal
-        visible={visible}
-        type={type}
-        onResult={handleSubmitResult}
-        onCancel={handleCloseForm}
-      />
+      <UserFormModal visible={visible} type={type} onResult={handleSubmitResult} onCancel={handleCloseForm} />
     </>
   );
 }

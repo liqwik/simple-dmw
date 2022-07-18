@@ -41,14 +41,7 @@ export default function DocumentForm({
     }
 
     if (isEdit && editDocument) {
-      const {
-        docDate,
-        docIn,
-        docOut,
-        issueDate,
-        receivedDate,
-        signDate,
-      } = editDocument;
+      const { docDate, docIn, docOut, issueDate, receivedDate, signDate } = editDocument;
 
       form.setFieldsValue({
         ...editDocument,
@@ -59,8 +52,7 @@ export default function DocumentForm({
           sender: docIn && docIn.sender && docIn.sender.id,
           receiver: docIn && docIn.receiver && docIn.receiver.id,
           senderDate: docIn && docIn.senderDate && moment(docIn.senderDate),
-          receiverDate:
-            docIn && docIn.receiverDate && moment(docIn.receiverDate),
+          receiverDate: docIn && docIn.receiverDate && moment(docIn.receiverDate),
         },
         docOut: {
           ...docOut,
@@ -68,8 +60,7 @@ export default function DocumentForm({
           sender: docOut && docOut.sender && docOut.sender.id,
           receiver: docOut && docOut.receiver && docOut.receiver.id,
           senderDate: docOut && docOut.senderDate && moment(docOut.senderDate),
-          receiverDate:
-            docOut && docOut.receiverDate && moment(docOut.receiverDate),
+          receiverDate: docOut && docOut.receiverDate && moment(docOut.receiverDate),
         },
         issueDate: issueDate && moment(issueDate),
         receivedDate: receivedDate && moment(receivedDate),
@@ -79,14 +70,7 @@ export default function DocumentForm({
   }, [form, editDocument, isEdit, validateErrors]);
 
   const handleSubmit = fieldsValue => {
-    const {
-      docDate,
-      docIn,
-      docOut,
-      issueDate,
-      receivedDate,
-      signDate,
-    } = fieldsValue;
+    const { docDate, docIn, docOut, issueDate, receivedDate, signDate } = fieldsValue;
     const defaultDateFormat = 'YYYY-MM-DD HH:mm:ss';
 
     const values = {
@@ -95,26 +79,14 @@ export default function DocumentForm({
       docIn: {
         ...docIn,
         date: docIn && docIn.date && docIn.date.format(defaultDateFormat),
-        senderDate:
-          docIn &&
-          docIn.senderDate &&
-          docIn.senderDate.format(defaultDateFormat),
-        receiverDate:
-          docIn &&
-          docIn.receiverDate &&
-          docIn.receiverDate.format(defaultDateFormat),
+        senderDate: docIn && docIn.senderDate && docIn.senderDate.format(defaultDateFormat),
+        receiverDate: docIn && docIn.receiverDate && docIn.receiverDate.format(defaultDateFormat),
       },
       docOut: {
         ...docOut,
         date: docOut && docOut.date && docOut.date.format(defaultDateFormat),
-        senderDate:
-          docOut &&
-          docOut.senderDate &&
-          docOut.senderDate.format(defaultDateFormat),
-        receiverDate:
-          docOut &&
-          docOut.receiverDate &&
-          docOut.receiverDate.format(defaultDateFormat),
+        senderDate: docOut && docOut.senderDate && docOut.senderDate.format(defaultDateFormat),
+        receiverDate: docOut && docOut.receiverDate && docOut.receiverDate.format(defaultDateFormat),
       },
       issueDate: issueDate && issueDate.format(defaultDateFormat),
       receivedDate: receivedDate && receivedDate.format(defaultDateFormat),
@@ -134,22 +106,13 @@ export default function DocumentForm({
 
   return (
     <>
-      <Form
-        {...formItemLayout}
-        form={form}
-        layout="horizontal"
-        onFinish={handleSubmit}
-      >
+      <Form {...formItemLayout} form={form} layout="horizontal" onFinish={handleSubmit}>
         <AppLayoutWithHeader
           title={`${isEdit ? 'កែប្រែ' : 'បង្កើត'} ឯកសារ`}
           bg="transparent"
           padding="0"
           extra={[
-            <MySubmitButton
-              type="primary"
-              icon={<SaveOutlined />}
-              loading={isSubmitting}
-            >
+            <MySubmitButton type="primary" icon={<SaveOutlined />} loading={isSubmitting}>
               {isEdit ? 'កែប្រែ' : 'រក្សាទុក'}
             </MySubmitButton>,
           ]}
@@ -168,10 +131,7 @@ export default function DocumentForm({
                   ]}
                 />
                 <Form.Item name="docDate" label="កាលបរិច្ឆេទលិខិត">
-                  <DatePicker
-                    format="DD-MM-YYYY"
-                    placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                  />
+                  <DatePicker format="DD-MM-YYYY" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                 </Form.Item>
 
                 <InstitutionDropdown
@@ -184,11 +144,7 @@ export default function DocumentForm({
                   <Input.TextArea rows={6} />
                 </Form.Item>
 
-                <MySelect
-                  name="docTypeId"
-                  label="ប្រភេទឯកសារ"
-                  placeholder="ជ្រើសរើសប្រភេទឯកសារ"
-                >
+                <MySelect name="docTypeId" label="ប្រភេទឯកសារ" placeholder="ជ្រើសរើសប្រភេទឯកសារ">
                   {docTypeList &&
                     docTypeList.map(docType => (
                       <MySelect.Option key={docType.id} value={docType.id}>
@@ -202,9 +158,7 @@ export default function DocumentForm({
                     <Space direction="vertical">
                       <Radio value="normal">{DOC_STATUS_LABEL.normal}</Radio>
                       <Radio value="urgent">{DOC_STATUS_LABEL.urgent}</Radio>
-                      <Radio value="signature">
-                        {DOC_STATUS_LABEL.signature}
-                      </Radio>
+                      <Radio value="signature">{DOC_STATUS_LABEL.signature}</Radio>
                     </Space>
                   </Radio.Group>
                 </Form.Item>
@@ -214,11 +168,7 @@ export default function DocumentForm({
                 <MyTextInput name={['docIn', 'no']} label="លេខចូលខេត្ត" />
 
                 <Form.Item name={['docIn', 'date']} label="កាលបរិច្ឆេទចូលខេត្ត">
-                  <DatePicker
-                    showTime
-                    format="DD-MM-YYYY HH:mm A"
-                    placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                  />
+                  <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                 </Form.Item>
 
                 {isAdmin && (
@@ -243,26 +193,15 @@ export default function DocumentForm({
                           name={['docIn', 'sender']}
                           label="អ្នកប្រគល់"
                           placeholder="ជ្រើសរើសអ្នកប្រគល់"
-                          selectedValue={
-                            editDocument &&
-                            editDocument.docIn &&
-                            editDocument.docIn.sender
-                          }
+                          selectedValue={editDocument && editDocument.docIn && editDocument.docIn.sender}
                           onSelectedValue={handleDocInSenderSelect}
                           {...fieldVerticle}
                         />
                       </Col>
 
                       <Col span={8}>
-                        <Form.Item
-                          name={['docIn', 'senderDate']}
-                          {...fieldVerticle}
-                        >
-                          <DatePicker
-                            showTime
-                            format="DD-MM-YYYY HH:mm A"
-                            placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                          />
+                        <Form.Item name={['docIn', 'senderDate']} {...fieldVerticle}>
+                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                         </Form.Item>
                       </Col>
                     </Row>
@@ -274,25 +213,14 @@ export default function DocumentForm({
                           name={['docIn', 'receiver']}
                           label="អ្នកទទួល"
                           placeholder="ជ្រើសរើសអ្នកទទួល"
-                          selectedValue={
-                            editDocument &&
-                            editDocument.docIn &&
-                            editDocument.docIn.receiver
-                          }
+                          selectedValue={editDocument && editDocument.docIn && editDocument.docIn.receiver}
                           onSelectedValue={handleDocInReceiverSelect}
                           {...fieldVerticle}
                         />
                       </Col>
                       <Col span={8}>
-                        <Form.Item
-                          name={['docIn', 'receiverDate']}
-                          {...fieldVerticle}
-                        >
-                          <DatePicker
-                            showTime
-                            format="DD-MM-YYYY HH:mm A"
-                            placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                          />
+                        <Form.Item name={['docIn', 'receiverDate']} {...fieldVerticle}>
+                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                         </Form.Item>
                       </Col>
                     </Row>
@@ -307,25 +235,14 @@ export default function DocumentForm({
                   </Form.Item>
 
                   <Form.Item name="signDate" label="កាលបរិច្ឆេទ">
-                    <DatePicker
-                      showTime
-                      format="DD-MM-YYYY HH:mm A"
-                      placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                    />
+                    <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                   </Form.Item>
                 </Card>
               )}
 
               <Card title="ឯកសារចេញ" {...cardOpts}>
-                <Form.Item
-                  name={['docOut', 'date']}
-                  label="កាលបរិច្ឆេទបញ្ចេញឯកសារ"
-                >
-                  <DatePicker
-                    showTime
-                    format="DD-MM-YYYY HH:mm A"
-                    placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                  />
+                <Form.Item name={['docOut', 'date']} label="កាលបរិច្ឆេទបញ្ចេញឯកសារ">
+                  <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                 </Form.Item>
 
                 {isAdmin && (
@@ -350,11 +267,7 @@ export default function DocumentForm({
                           name={['docOut', 'sender']}
                           label="អ្នកប្រគល់"
                           placeholder="ជ្រើសរើសអ្នកប្រគល់"
-                          selectedValue={
-                            editDocument &&
-                            editDocument.docOut &&
-                            editDocument.docOut.sender
-                          }
+                          selectedValue={editDocument && editDocument.docOut && editDocument.docOut.sender}
                           onSelectedValue={value => {
                             form.setFieldsValue({ docOut: { sender: value } });
                           }}
@@ -363,15 +276,8 @@ export default function DocumentForm({
                       </Col>
 
                       <Col span={8}>
-                        <Form.Item
-                          name={['docOut', 'senderDate']}
-                          {...fieldVerticle}
-                        >
-                          <DatePicker
-                            showTime
-                            format="DD-MM-YYYY HH:mm A"
-                            placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                          />
+                        <Form.Item name={['docOut', 'senderDate']} {...fieldVerticle}>
+                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                         </Form.Item>
                       </Col>
                     </Row>
@@ -383,11 +289,7 @@ export default function DocumentForm({
                           name={['docOut', 'receiver']}
                           label="អ្នកទទួល"
                           placeholder="ជ្រើសរើសអ្នកទទួល"
-                          selectedValue={
-                            editDocument &&
-                            editDocument.docOut &&
-                            editDocument.docOut.receiver
-                          }
+                          selectedValue={editDocument && editDocument.docOut && editDocument.docOut.receiver}
                           onSelectedValue={value => {
                             form.setFieldsValue({
                               docOut: { receiver: value },
@@ -398,15 +300,8 @@ export default function DocumentForm({
                       </Col>
 
                       <Col span={8}>
-                        <Form.Item
-                          name={['docOut', 'receiverDate']}
-                          {...fieldVerticle}
-                        >
-                          <DatePicker
-                            showTime
-                            format="DD-MM-YYYY HH:mm A"
-                            placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                          />
+                        <Form.Item name={['docOut', 'receiverDate']} {...fieldVerticle}>
+                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                         </Form.Item>
                       </Col>
                     </Row>

@@ -47,7 +47,7 @@ function DashboardPage() {
     fetchCountDocType();
   }, [dateFilter]);
 
-  const handleSelectDate = (date, dateString) => {
+  const handleSelectDate = (date, _dateString) => {
     setDateFilter({
       start: date[0],
       end: date[1],
@@ -70,10 +70,7 @@ function DashboardPage() {
         </Col>
         <Col span={8}>
           <Card>
-            <Statistic
-              title="ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់"
-              value={summaryData?.urgent}
-            />
+            <Statistic title="ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់" value={summaryData?.urgent} />
           </Card>
         </Col>
         <Col span={8}>
@@ -84,9 +81,9 @@ function DashboardPage() {
 
         <Col span={24}>
           <Card
-            title={`របាយការណ៍សរុប ចាប់ពី ${dateFilter.start.format(
+            title={`របាយការណ៍សរុប ចាប់ពី ${dateFilter.start.format('DD/MM/YYYY')} ដល់ ${dateFilter.end.format(
               'DD/MM/YYYY',
-            )} ដល់ ${dateFilter.end.format('DD/MM/YYYY')}`}
+            )}`}
             extra={
               <>
                 <DateFilter onChange={handleSelectDate} />

@@ -1,17 +1,9 @@
 import DashboardPage from './pages/DashboardPage';
 import { CategoryPage } from './pages/CategoryPage/Loadable';
-import {
-  InternalUserCreate,
-  InternalUserEdit,
-  InternalUserPage,
-} from './pages/InternalUserPage/Loadable';
+import { InternalUserCreate, InternalUserEdit, InternalUserPage } from './pages/InternalUserPage/Loadable';
 
 import AppRoute from 'utils/AppRoute';
-import {
-  DocumentCreate,
-  DocumentEdit,
-  DocumentPage,
-} from './pages/DocumentPage/Loadable';
+import { DocumentCreate, DocumentEdit, DocumentPage } from './pages/DocumentPage/Loadable';
 import { DocTypePage } from './pages/DocTypePage/Loadable';
 import { InstitutionPage } from './pages/InstitutionPage/Loadable';
 import { UserPage } from './pages/UserPage/Loadable';

@@ -8,9 +8,7 @@ function useUser({ type }: any) {
 
   const dispatch = useDispatch();
   const { actions } = useUserSlice();
-  const { items, isLoading, hasNextPage, validationErrors } = useSelector(
-    selectUser,
-  );
+  const { items, isLoading, hasNextPage, validationErrors } = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(

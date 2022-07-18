@@ -15,13 +15,7 @@ const SearchFilterBar = ({ value, onSearch }) => {
     setSearchTerm(v);
   };
 
-  return (
-    <MySearchField
-      value={searchTerm}
-      onSearch={handleSearch}
-      onChange={handleChange}
-    />
-  );
+  return <MySearchField value={searchTerm} onSearch={handleSearch} onChange={handleChange} />;
 };
 
 export default SearchFilterBar;

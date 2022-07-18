@@ -1,13 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 
-export function UserList({
-  items,
-  loading,
-  pagination,
-  onPageChange,
-  onSelectRow,
-}: any) {
+export function UserList({ items, loading, pagination, onPageChange, onSelectRow }: any) {
   return (
     <Table
       bordered

@@ -22,12 +22,11 @@ export function MyWrapper({ children }) {
           content: (
             <div>
               <p>
-                It appears that you don't have permission to access this page.
-                Pleaes make sure you're authorized to view this content.
+                It appears that you don't have permission to access this page. Pleaes make sure you're authorized to
+                view this content.
               </p>
               <p>
-                If you think you should be able to view this page, please
-                contact administrator for resolve this issue.
+                If you think you should be able to view this page, please contact administrator for resolve this issue.
               </p>
             </div>
           ),

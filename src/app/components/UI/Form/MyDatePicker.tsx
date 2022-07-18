@@ -2,13 +2,7 @@ import React from 'react';
 import { DatePicker, Form } from 'antd';
 import PropTypes from 'prop-types';
 
-export const MyDatePicker = ({
-  label,
-  name,
-  rules,
-  placeholder,
-  ...props
-}: any) => {
+export const MyDatePicker = ({ label, name, rules, placeholder, ...props }: any) => {
   return (
     <Form.Item label={label} name={name} rules={rules} {...props}>
       <DatePicker />

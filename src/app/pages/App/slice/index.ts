@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer } from 'utils/redux-injectors';
 import { CommonState } from './types';
@@ -11,7 +10,7 @@ const slice = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    success(state, action: PayloadAction<any>) {
+    success(state) {
       state.status = 200;
     },
 

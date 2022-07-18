@@ -44,11 +44,7 @@ export function InstitutionDropdown({ onSelectedValue }) {
             marginRight: '8px',
           }}
         >
-          <Select
-            showSearch
-            onSearch={handleSearch}
-            placeholder="ជ្រើសរើសប្រភពលិខិត"
-          >
+          <Select showSearch onSearch={handleSearch} placeholder="ជ្រើសរើសប្រភពលិខិត">
             {items &&
               items.map(ins => (
                 <Select.Option key={ins.id} value={ins.id}>
@@ -63,11 +59,7 @@ export function InstitutionDropdown({ onSelectedValue }) {
         </Button>
       </Form.Item>
 
-      <InstitutionFormModal
-        visible={visible}
-        onSubmit={handleSubmit}
-        onCancel={closeForm}
-      />
+      <InstitutionFormModal visible={visible} onSubmit={handleSubmit} onCancel={closeForm} />
     </>
   );
 }

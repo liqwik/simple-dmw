@@ -2,12 +2,7 @@ import React, { useEffect } from 'react';
 import { Col, Row, Card, Form, Button } from 'antd';
 import { cardOpts } from './FormStyles';
 import { createPassword } from 'utils/auth';
-import {
-  MyPasswordInput,
-  MySelect,
-  MySubmitButton,
-  MyTextInput,
-} from 'app/components/UI/Form';
+import { MyPasswordInput, MySelect, MySubmitButton, MyTextInput } from 'app/components/UI/Form';
 import { SaveOutlined } from '@ant-design/icons';
 import { AppLayoutWithHeader } from 'app/components/UI/Layout';
 import { FieldErrorMsg } from 'app/components/UI/Message';
@@ -71,11 +66,7 @@ function InternalUserForm({
           bg="transparent"
           padding="0"
           extra={[
-            <MySubmitButton
-              type="primary"
-              icon={<SaveOutlined />}
-              loading={isSubmitting}
-            >
+            <MySubmitButton type="primary" icon={<SaveOutlined />} loading={isSubmitting}>
               {isEdit ? 'Update' : 'Save'}
             </MySubmitButton>,
           ]}
@@ -159,11 +150,7 @@ function InternalUserForm({
                               return Promise.resolve();
                             }
 
-                            return Promise.reject(
-                              new Error(
-                                'The two passwords that you entered do not match!',
-                              ),
-                            );
+                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
                           },
                         }),
                       ]}

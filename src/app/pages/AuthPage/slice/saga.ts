@@ -8,12 +8,10 @@ function* login(action) {
   try {
     const { idtt, pwd } = action.payload;
 
-    const data = yield call(() =>
-      authService.login({ identity: idtt, password: pwd }),
-    );
+    const data = yield call(() => authService.login({ identity: idtt, password: pwd }));
 
     yield put(actions.loginSuccess(data));
-  } catch (err) {
+  } catch (err: any) {
     const { status } = err;
 
     if (status === 404) {

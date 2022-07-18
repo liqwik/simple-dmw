@@ -31,5 +31,4 @@ export const queryStringToFieldFilter = filter => {
   return filterResult.join(',');
 };
 
-export const hasFieldFilter = filter =>
-  filter && Object.keys(filter).length > 0;
+export const hasFieldFilter = filter => filter && Object.keys(filter).length > 0;

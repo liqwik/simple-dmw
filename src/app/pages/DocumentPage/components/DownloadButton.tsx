@@ -4,13 +4,7 @@ import { Button } from 'antd';
 
 const DownloadButton: React.FC<any> = ({ src }) => {
   return (
-    <Button
-      type="text"
-      block
-      icon={<CloudDownloadOutlined />}
-      href={src}
-      download
-    >
+    <Button type="text" block icon={<CloudDownloadOutlined />} href={src} download>
       ទាញយក
     </Button>
   );

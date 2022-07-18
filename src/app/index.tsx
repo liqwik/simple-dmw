@@ -30,10 +30,7 @@ export function App() {
         defaultTitle="ប្រព័ន្ធគ្រប់គ្រងចរន្តឯកសារ ការិយាល័យក្រុមជំនួយការ"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta
-          name="description"
-          content="ប្រព័ន្ធគ្រប់គ្រងចរន្តឯកសារ ការិយាល័យក្រុមជំនួយការ"
-        />
+        <meta name="description" content="ប្រព័ន្ធគ្រប់គ្រងចរន្តឯកសារ ការិយាល័យក្រុមជំនួយការ" />
       </Helmet>
 
       <Switch>

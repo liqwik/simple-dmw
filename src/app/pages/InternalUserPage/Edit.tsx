@@ -14,12 +14,7 @@ export function InternalUserEdit({ history }) {
 
   const dispatch = useDispatch();
   const { actions } = useInternalUserSlice();
-  const {
-    itemDetail,
-    isSubmitting,
-    validationErrors,
-    serviceError,
-  } = useSelector(selectInternalUser);
+  const { itemDetail, isSubmitting, validationErrors, serviceError } = useSelector(selectInternalUser);
 
   useEffect(() => {
     dispatch(actions.getDetailAction(id));
@@ -39,8 +34,7 @@ export function InternalUserEdit({ history }) {
         validationErrors &&
         validationErrors.length > 0 &&
         validationErrors.map(err => ({
-          name:
-            err.field.split('.').length > 0 ? err.field.split('.') : err.field,
+          name: err.field.split('.').length > 0 ? err.field.split('.') : err.field,
           errors: [err.msg],
         }))
       }

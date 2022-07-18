@@ -14,11 +14,7 @@ import { ITEM_LIMIT } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { CategoryForm } from './Form';
 import { useForm } from 'antd/lib/form/Form';
 
@@ -49,14 +45,7 @@ export function CategoryPage({ location }: Props) {
 
   const dispatch = useDispatch();
   const { actions } = useCategorySlice();
-  const {
-    items,
-    totalItem,
-    serviceError,
-    validationErrors,
-    isSubmitting,
-    isLoading,
-  } = useSelector(selectCategory);
+  const { items, totalItem, serviceError, validationErrors, isSubmitting, isLoading } = useSelector(selectCategory);
 
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.category });
   const [form] = useForm();
@@ -138,11 +127,7 @@ export function CategoryPage({ location }: Props) {
   };
 
   return (
-    <BaseCRUDWrapper
-      pageTitle="Category Management"
-      refreshRoute={AppRoute.category}
-      serviceError={serviceError}
-    >
+    <BaseCRUDWrapper pageTitle="Category Management" refreshRoute={AppRoute.category} serviceError={serviceError}>
       <Row gutter={[16, 16]}>
         <Col span={8}>
           <Card bordered={false}>

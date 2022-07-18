@@ -4,13 +4,7 @@ import DateTimeUtil from 'utils/DateTimeUtil';
 import Text from 'antd/lib/typography/Text';
 import { DOC_STATUS_LABEL } from 'utils/constants';
 
-function HomeList({
-  items,
-  loading,
-  pagination,
-  onViewDetail,
-  onPageChange,
-}: any) {
+function HomeList({ items, loading, pagination, onViewDetail, onPageChange }: any) {
   return (
     <Table
       bordered
@@ -66,8 +60,7 @@ function HomeList({
                     <Text>{institutionId && institutionId.name}</Text>
                     <br />
                     <Text type="secondary" style={{ fontSize: '13px' }}>
-                      {record.docDate &&
-                        DateTimeUtil.forDisplay(record.docDate)}
+                      {record.docDate && DateTimeUtil.forDisplay(record.docDate)}
                     </Text>
                   </div>
                 );
@@ -131,9 +124,7 @@ function HomeList({
           key: 'id',
           align: 'center',
           width: '136px',
-          render: (e, record) => (
-            <Text>{DOC_STATUS_LABEL[record.docStatus]}</Text>
-          ),
+          render: (e, record) => <Text>{DOC_STATUS_LABEL[record.docStatus]}</Text>,
         },
         {
           title: <Text strong>ខ្លឹមសារលម្អិត</Text>,

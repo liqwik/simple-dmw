@@ -2,14 +2,7 @@ import React from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Table, Button, Popconfirm } from 'antd';
 
-export function DocTypeList({
-  categories,
-  loading,
-  pagination,
-  onPageChange,
-  onSelectRow,
-  onRemove,
-}) {
+export function DocTypeList({ categories, loading, pagination, onPageChange, onSelectRow, onRemove }) {
   return (
     <Table
       bordered
@@ -67,11 +60,11 @@ export function DocTypeList({
           title: 'Action',
           width: '160px',
           align: 'center',
-          render: (e, record) => (
+          render: (_e, record) => (
             <span>
               <Button
                 type="link"
-                onClick={e => {
+                onClick={_e => {
                   onSelectRow(record);
                 }}
               >

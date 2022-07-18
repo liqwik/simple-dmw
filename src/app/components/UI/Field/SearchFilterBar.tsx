@@ -8,7 +8,5 @@ export const SearchFilterBar = ({ value, onSearch, onChange }: any) => {
     }, 300);
   };
 
-  return (
-    <MySearchField value={value} onSearch={handleSearch} onChange={onChange} />
-  );
+  return <MySearchField value={value} onSearch={handleSearch} onChange={onChange} />;
 };

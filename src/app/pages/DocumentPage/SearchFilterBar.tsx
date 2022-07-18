@@ -5,13 +5,7 @@ import { MySearchField } from 'app/components/UI/Field';
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const SearchFilterBar = ({
-  showReset,
-  value,
-  onReset,
-  onSearch,
-  onFilter,
-}: any) => {
+const SearchFilterBar = ({ showReset, value, onReset, onSearch, onFilter }: any) => {
   const [searchValue, setSearchValue] = useState(value);
 
   const handleSearch = val => {
@@ -38,21 +32,13 @@ const SearchFilterBar = ({
         style={{ width: '300px' }}
         onChange={value => onFilter({ docDateRange: value })}
       />
-      <Select
-        defaultValue=""
-        style={{ width: 220 }}
-        onChange={value => onFilter({ isSign: value })}
-      >
+      <Select defaultValue="" style={{ width: 220 }} onChange={value => onFilter({ isSign: value })}>
         <Option value="">-- ជ្រើសរើសចរាចរឯកសារ --</Option>
         <Option value="1">មានចំណារ</Option>
         <Option value="0">គ្មានចំណារ</Option>
       </Select>
 
-      <MySearchField
-        value={searchValue}
-        onChange={handleChange}
-        onSearch={handleSearch}
-      />
+      <MySearchField value={searchValue} onChange={handleChange} onSearch={handleSearch} />
 
       {showReset && <Button onClick={handleReset}>សម្អាត</Button>}
     </Space>

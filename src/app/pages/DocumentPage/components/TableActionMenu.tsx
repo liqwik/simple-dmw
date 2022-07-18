@@ -5,7 +5,7 @@ import EditButton from './EditButton';
 import DownloadButton from './DownloadButton';
 import PrintButton from './PrintButton';
 
-function TableActionMenu({ editRoute, downloadSrc, onPrintDoc, ...props }) {
+function TableActionMenu({ editRoute, downloadSrc, onPrintDoc }) {
   return (
     <Dropdown
       placement="bottomRight"
@@ -25,13 +25,7 @@ function TableActionMenu({ editRoute, downloadSrc, onPrintDoc, ...props }) {
       }
       trigger={['click']}
     >
-      <Button
-        type="text"
-        block
-        className="btn-action"
-        icon={<MoreOutlined />}
-        onClick={e => e.preventDefault()}
-      >
+      <Button type="text" block className="btn-action" icon={<MoreOutlined />} onClick={e => e.preventDefault()}>
         <span>សកម្មភាព</span>
       </Button>
     </Dropdown>

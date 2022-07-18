@@ -10,10 +10,7 @@ function DateFilter({ ...props }: any) {
       ranges={{
         ថ្ងៃនេះ: [moment(), moment()],
         សប្តាហ៍នេះ: [moment().startOf('week'), moment().endOf('week')],
-        ខែមុន: [
-          moment().subtract(1, 'month').startOf('month'),
-          moment().subtract(1, 'month').endOf('month'),
-        ],
+        ខែមុន: [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
         ខែនេះ: [moment().startOf('month'), moment().endOf('month')],
         ឆ្នាំនេះ: [moment().startOf('year'), moment().endOf('year')],
       }}

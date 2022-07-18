@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  LogoutOutlined,
-  SettingOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Avatar } from 'antd';
 import { AppStorage } from 'utils';
 import './styles.css';
@@ -58,10 +54,7 @@ export class HeaderAvatar extends Component {
       <div className="avatar-wrapper">
         <Dropdown overlay={menuHeaderDropdown}>
           <div>
-            <Avatar
-              style={{ backgroundColor: '#87d068', marginRight: '10px' }}
-              icon={<UserOutlined />}
-            />
+            <Avatar style={{ backgroundColor: '#87d068', marginRight: '10px' }} icon={<UserOutlined />} />
             {/* <span>{this.state.displayName}</span> */}
           </div>
         </Dropdown>

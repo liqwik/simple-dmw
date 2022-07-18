@@ -8,7 +8,7 @@ function* getList(action) {
     const result = yield call(() => categoryService.getAll(action.payload));
 
     yield put(actions.getListSuccess(result));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getListFail(err.data.msg || err.data),
@@ -21,7 +21,7 @@ function* getTotalItem(action) {
     const data = yield call(() => categoryService.count(action.payload));
 
     yield put(actions.getTotalItem(data.total));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getListFail(err.data.msg || err.data),
@@ -34,7 +34,7 @@ function* add(action) {
     const data = yield call(() => categoryService.create(action.payload));
 
     yield put(actions.addOne(data));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),
@@ -47,7 +47,7 @@ function* update(action) {
     yield call(() => categoryService.update(action.payload.id, action.payload));
 
     yield put(actions.updateOne(action.payload));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),
@@ -60,7 +60,7 @@ function* remove(action) {
     yield call(() => categoryService.delete(action.payload));
 
     yield put(actions.removeOne(action.payload));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),

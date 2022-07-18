@@ -59,11 +59,7 @@ function SingleUpload(props) {
     <div>
       <p style={{ marginBottom: '5px' }}>{label}</p>
       <Upload {...uploadProps}>
-        {preview ? (
-          <img src={preview} alt="avatar" style={{ width: '100%' }} />
-        ) : (
-          <UploadButton loading={loading} />
-        )}
+        {preview ? <img src={preview} alt="avatar" style={{ width: '100%' }} /> : <UploadButton loading={loading} />}
       </Upload>
     </div>
   );

@@ -10,11 +10,7 @@ import HomeList from './List';
 import DocumentDetail from 'app/pages/DocumentPage/components/Detail';
 import SearchFilterBar from './SearchFilterBar';
 import { APIBase } from 'config';
-import {
-  getQueryParams,
-  hasFieldFilter,
-  queryStringToFieldFilter,
-} from 'utils/http';
+import { getQueryParams, hasFieldFilter, queryStringToFieldFilter } from 'utils/http';
 import { useLocation } from 'react-router-dom';
 import { ITEM_LIMIT } from 'utils/constants';
 import useQueryString from 'hooks/useQueryString';
@@ -52,12 +48,9 @@ export function HomePage() {
       const result = await clientHttp(`${APIBase}/v1`).get('/documents', {
         params: ObjectUtil.cleanObjectValue(filterQuery),
       });
-      const resultCount = await clientHttp(`${APIBase}/v1`).get(
-        '/documents/c',
-        {
-          params: ObjectUtil.cleanObjectValue({ q, fq }),
-        },
-      );
+      const resultCount = await clientHttp(`${APIBase}/v1`).get('/documents/c', {
+        params: ObjectUtil.cleanObjectValue({ q, fq }),
+      });
 
       setItems(result);
       setTotalItem(resultCount.total);
@@ -117,9 +110,7 @@ export function HomePage() {
   const handleFilter = values => {
     if (hasFieldFilter(values)) {
       if (values.docDateRange) {
-        values['docStart'] = moment(values.docDateRange[0])
-          .startOf('day')
-          .unix();
+        values['docStart'] = moment(values.docDateRange[0]).startOf('day').unix();
         values['docEnd'] = moment(values.docDateRange[1]).endOf('day').unix();
 
         delete values.docDateRange;
@@ -187,11 +178,7 @@ export function HomePage() {
           </Row>
         </Content>
 
-        <DocumentDetail
-          item={itemDetail}
-          visible={!!itemDetail}
-          onClose={handleCloseDetail}
-        />
+        <DocumentDetail item={itemDetail} visible={!!itemDetail} onClose={handleCloseDetail} />
       </Layout>
     </>
   );

@@ -60,10 +60,7 @@ export function InternalUserList({ items, loading, pagination, onPageChange }) {
             return (
               <div>
                 <Space size="middle">
-                  <Link
-                    type="button"
-                    to={`${AppRoute.internalUser}/edit/${record.id}`}
-                  >
+                  <Link type="button" to={`${AppRoute.internalUser}/edit/${record.id}`}>
                     Edit
                   </Link>
                 </Space>

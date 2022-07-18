@@ -6,12 +6,10 @@ import { institutionActions as actions } from '.';
 
 function* getList(action) {
   try {
-    const result = yield call(() =>
-      institutionService.getAll(ObjectUtil.cleanObjectValue(action.payload)),
-    );
+    const result = yield call(() => institutionService.getAll(ObjectUtil.cleanObjectValue(action.payload)));
 
     yield put(actions.getListSuccess(result));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getListFail(err.data.msg || err.data),
@@ -21,12 +19,10 @@ function* getList(action) {
 
 function* getTotalItem(action) {
   try {
-    const data = yield call(() =>
-      institutionService.count(ObjectUtil.cleanObjectValue(action.payload)),
-    );
+    const data = yield call(() => institutionService.count(ObjectUtil.cleanObjectValue(action.payload)));
 
     yield put(actions.getTotalItem(data.total));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.getListFail(err.data.msg || err.data),
@@ -39,7 +35,7 @@ function* add(action) {
     const data = yield call(() => institutionService.create(action.payload));
 
     yield put(actions.addOne(data));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),
@@ -49,12 +45,10 @@ function* add(action) {
 
 function* update(action) {
   try {
-    yield call(() =>
-      institutionService.update(action.payload.id, action.payload),
-    );
+    yield call(() => institutionService.update(action.payload.id, action.payload));
 
     yield put(actions.updateOne(action.payload));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),
@@ -67,7 +61,7 @@ function* remove(action) {
     yield call(() => institutionService.delete(action.payload));
 
     yield put(actions.removeOne(action.payload));
-  } catch (err) {
+  } catch (err: any) {
     yield errorHandler({
       errorObject: err,
       errorAction: actions.failure(err.data.data || err.data),
