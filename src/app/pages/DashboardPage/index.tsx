@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AppLayout } from 'app/components/UI/Layout';
 import { Card, Col, Row, Statistic } from 'antd';
 import { reportService } from 'services';
@@ -6,9 +6,12 @@ import DocTypeReport from './DocTypeReport';
 import DateTimeUtil from 'utils/DateTimeUtil';
 import DateFilter from './DateFilter';
 import moment from 'moment';
+import { DashboardCard } from 'app/components/Card/DashboardCard';
+import { FcDocument, FcPackage, FcAnswers, FcInspection } from 'react-icons/fc';
+import { parse } from 'path';
 
 function DashboardPage() {
-  const [summaryData, setSummaryData] = useState<any>(null);
+  const [summaryData, setSummaryData] = useState<any>({ normal: '0', urgent: '0', signature: '0' });
   const [docTypeReport, setDocTypeReport] = useState<any>(null);
   const [dateFilter, setDateFilter] = useState<any>({
     start: moment().startOf('month'),
@@ -22,13 +25,12 @@ function DashboardPage() {
         DateTimeUtil.qsFormat(dateFilter.end.format('YYYY-MM-DD')),
       );
 
-      setSummaryData(
-        docTypeTotal.reduce((prev, curr) => {
-          prev[curr._id] = curr.totalDoc;
+      const flatSummaryData = docTypeTotal.reduce((prev, curr) => {
+        prev[curr._id] = curr.totalDoc.toString();
+        return prev;
+      }, {});
 
-          return prev;
-        }, {}),
-      );
+      setSummaryData(prevState => ({ ...prevState, ...flatSummaryData }));
     };
 
     fetchCountDocType();
@@ -54,6 +56,11 @@ function DashboardPage() {
     });
   };
 
+  const totalDocument = useMemo(
+    () => parseInt(summaryData.normal) + parseInt(summaryData.urgent) + parseInt(summaryData.signature),
+    [summaryData],
+  );
+
   return (
     <AppLayout
       style={{
@@ -63,20 +70,35 @@ function DashboardPage() {
       }}
     >
       <Row gutter={[16, 16]}>
-        <Col span={8}>
-          <Card>
-            <Statistic title="ឯកសារធម្មតា" value={summaryData?.normal} />
-          </Card>
+        <Col sm={12} md={6}>
+          <DashboardCard title="ឯកសារសរុប" icon={<FcPackage size="2rem" />} value={totalDocument} />
         </Col>
-        <Col span={8}>
-          <Card>
-            <Statistic title="ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់" value={summaryData?.urgent} />
-          </Card>
+
+        <Col sm={12} md={6}>
+          <DashboardCard
+            title="ឯកសារធម្មតា"
+            color="#096dd9"
+            icon={<FcDocument size="2rem" />}
+            value={summaryData?.normal}
+          />
         </Col>
-        <Col span={8}>
-          <Card>
-            <Statistic title="ឯកសារបានចាររួច" value={summaryData?.signature} />
-          </Card>
+
+        <Col sm={12} md={6}>
+          <DashboardCard
+            title="ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់"
+            color="#cf1322"
+            icon={<FcAnswers size="2rem" />}
+            value={summaryData?.urgent}
+          />
+        </Col>
+
+        <Col sm={12} md={6}>
+          <DashboardCard
+            title="ឯកសារបានចាររួច"
+            color="#389e0d"
+            icon={<FcInspection size="2rem" />}
+            value={summaryData?.signature}
+          />
         </Col>
 
         <Col span={24}>
