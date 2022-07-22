@@ -20,4 +20,12 @@ export class AppStorage {
   static getUserToken() {
     return this.getAuthData() ? this.getAuthData().t : '';
   }
+
+  static setViewMode(value) {
+    localStorage.setItem('viewMode', value);
+  }
+
+  static getViewMode() {
+    return localStorage.getItem('viewMode');
+  }
 }

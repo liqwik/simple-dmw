@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Col, Pagination, Radio, Row } from 'antd';
-import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons';
+
 import { useDispatch, useSelector } from 'react-redux';
 import AppRoute from 'utils/AppRoute';
-import { ITEM_LIMIT } from 'utils/constants';
+import { ITEM_LIMIT, listViewMode } from 'utils/constants';
 import SearchFilterBar from './SearchFilterBar';
 import BaseCRUDWrapper from '../App/BaseCRUDWrapper';
 import useQueryString from 'hooks/useQueryString';
@@ -16,6 +16,8 @@ import DocumentDetail from './components/Detail';
 import moment from 'moment';
 import DocCardList from './DocCardList';
 import printJS from 'print-js';
+import ToggleViewMode from './components/ToggleViewMode';
+import { AppStorage } from 'utils';
 
 interface Props {
   location?: any;
@@ -38,7 +40,7 @@ export function DocumentPage({ location }: Props) {
     page: qs.get('page') || 1,
   });
   const [itemDetail, setItemDetail] = useState(null);
-  const [viewMode, setViewMode] = useState(localStorage.getItem('viewMode') || 'list');
+  const [viewMode, setViewMode] = useState(AppStorage.getViewMode() || listViewMode.TABLE);
 
   useEffect(() => {
     const { q, fq } = filterQuery;
@@ -112,7 +114,7 @@ export function DocumentPage({ location }: Props) {
 
   const handleSwitchViewMode = e => {
     const viewModeValue = e.target.value;
-    localStorage.setItem('viewMode', viewModeValue);
+    AppStorage.setViewMode(viewModeValue);
     setViewMode(viewModeValue);
   };
 
@@ -122,6 +124,64 @@ export function DocumentPage({ location }: Props) {
       type: 'pdf',
       showModal: true,
     });
+  };
+
+  const renderList = () => {
+    if (viewMode === listViewMode.CARD) {
+      return (
+        <Col span={24}>
+          <Row gutter={[16, 16]}>
+            {items &&
+              items.map(item => (
+                <Col span={8} key={item.id}>
+                  <DocCardList
+                    item={item}
+                    loading={isLoading}
+                    pagination={{
+                      total: totalItem,
+                      pageSize: filterQuery.limit * 1,
+                      current: filterQuery.page * 1,
+                    }}
+                    onPrintDoc={handlePrintDoc}
+                    onViewDetail={handleViewDetail}
+                    onPageChange={handlePageChange}
+                  />
+                </Col>
+              ))}
+
+            <Col span={24}>
+              <Pagination
+                showTotal={total => `Total ${total} items`}
+                total={totalItem}
+                defaultPageSize={20}
+                defaultCurrent={1}
+                pageSize={filterQuery.limit * 1}
+                current={filterQuery.page * 1}
+              />
+            </Col>
+          </Row>
+        </Col>
+      );
+    }
+
+    return (
+      <Col span={24}>
+        <Card bordered={false}>
+          <DocumentList
+            items={items}
+            loading={isLoading}
+            pagination={{
+              total: totalItem,
+              pageSize: filterQuery.limit * 1,
+              current: filterQuery.page * 1,
+            }}
+            onViewDetail={handleViewDetail}
+            onPageChange={handlePageChange}
+            onPrintDoc={handlePrintDoc}
+          />
+        </Card>
+      </Col>
+    );
   };
 
   return (
@@ -146,71 +206,13 @@ export function DocumentPage({ location }: Props) {
                 onSearch={handleSearch}
                 onFilter={handleFilter}
               />
-              <Radio.Group value="small" onChange={handleSwitchViewMode}>
-                <Radio.Button value="card">
-                  <AppstoreOutlined />
-                </Radio.Button>
-                <Radio.Button value="list">
-                  <BarsOutlined />
-                </Radio.Button>
-              </Radio.Group>
+
+              <ToggleViewMode mode={viewMode} onSwitchViewMode={handleSwitchViewMode} />
             </Row>
           </Card>
         </Col>
 
-        {viewMode === 'card' && (
-          <Col span={24}>
-            <Row gutter={[16, 16]}>
-              {items &&
-                items.map(item => (
-                  <Col span={8} key={item.id}>
-                    <DocCardList
-                      item={item}
-                      loading={isLoading}
-                      pagination={{
-                        total: totalItem,
-                        pageSize: filterQuery.limit * 1,
-                        current: filterQuery.page * 1,
-                      }}
-                      onPrintDoc={handlePrintDoc}
-                      onViewDetail={handleViewDetail}
-                      onPageChange={handlePageChange}
-                    />
-                  </Col>
-                ))}
-
-              <Col span={24}>
-                <Pagination
-                  showTotal={total => `Total ${total} items`}
-                  total={totalItem}
-                  defaultPageSize={20}
-                  defaultCurrent={1}
-                  pageSize={filterQuery.limit * 1}
-                  current={filterQuery.page * 1}
-                />
-              </Col>
-            </Row>
-          </Col>
-        )}
-
-        {viewMode !== 'card' && (
-          <Col span={24}>
-            <Card bordered={false}>
-              <DocumentList
-                items={items}
-                loading={isLoading}
-                pagination={{
-                  total: totalItem,
-                  pageSize: filterQuery.limit * 1,
-                  current: filterQuery.page * 1,
-                }}
-                onViewDetail={handleViewDetail}
-                onPageChange={handlePageChange}
-                onPrintDoc={handlePrintDoc}
-              />
-            </Card>
-          </Col>
-        )}
+        {renderList()}
       </Row>
 
       <DocumentDetail item={itemDetail} visible={!!itemDetail} onClose={handleCloseDetail} />
