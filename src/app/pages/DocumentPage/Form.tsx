@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Col, Row, Card, Form, Space, DatePicker, Radio, Input } from 'antd';
+import { Col, Row, Card, Form, Space, DatePicker, Radio, Input, FormInstance } from 'antd';
 import { cardOpts, formItemLayout, fieldVerticle } from './FormStyles';
 import { MySelect, MySubmitButton, MyTextInput } from 'app/components/UI/Form';
 import { SaveOutlined } from '@ant-design/icons';
@@ -11,9 +11,10 @@ import { AppStorage } from 'utils';
 import { DOC_STATUS_LABEL } from 'utils/constants';
 import { InstitutionDropdown } from 'app/features/InstitutionDropdown/InstitutionDropdown';
 import { UserDropdown } from 'app/features/UserDropdown';
+import DateTimeUtil from 'utils/DateTimeUtil';
 
 type IDocumentForm = {
-  form?: any;
+  form: FormInstance;
   isSubmitting?: boolean;
   isEdit?: boolean;
   editDocument?: any;
@@ -104,6 +105,12 @@ export default function DocumentForm({
     form.setFieldsValue({ docIn: { receiver: value } });
   };
 
+  const handleDocDateChange = value => {
+    const lunarDate = DateTimeUtil.formatLunarDate(value);
+
+    form.setFieldsValue({ docLunarDate: lunarDate });
+  };
+
   return (
     <>
       <Form {...formItemLayout} form={form} layout="horizontal" onFinish={handleSubmit}>
@@ -131,7 +138,15 @@ export default function DocumentForm({
                   ]}
                 />
                 <Form.Item name="docDate" label="កាលបរិច្ឆេទលិខិត">
-                  <DatePicker format="DD-MM-YYYY" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
+                  <DatePicker format="DD-MM-YYYY" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" onChange={handleDocDateChange} />
+                </Form.Item>
+
+                <Form.Item noStyle shouldUpdate={(prevValues, curValues) => prevValues.docDate !== curValues.docDate}>
+                  {() => (
+                    <Form.Item name="docLunarDate" label="កាលបរិច្ឆេទចន្ទគតិ">
+                      <Input.TextArea placeholder="ថ្ងៃព្រហស្បតិ៍ ១៤កើត ខែភទ្របទ ឆ្នាំកុរ ឯកស័ក​ ព.ស.២៥៦៣" rows={2} />
+                    </Form.Item>
+                  )}
                 </Form.Item>
 
                 <InstitutionDropdown
