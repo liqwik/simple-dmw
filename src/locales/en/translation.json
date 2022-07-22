@@ -24,5 +24,9 @@
   "internalUser": "Internal User",
   "institution": "Institution",
   "monthly": "Monthly",
-  "yearly": "Yearly"
+  "yearly": "Yearly",
+  "letter": "ប្រភពលិខិត",
+  "chooseLetter": "ជ្រើសរើសប្រភពលិខិត",
+  "en": "English",
+  "km": "ខ្មែរ"
 }

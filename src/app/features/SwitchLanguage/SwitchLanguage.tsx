@@ -1,21 +1,22 @@
 import React from 'react';
 import { Dropdown, Menu } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { AppStorage } from 'utils';
 
 function SwitchLanguage() {
   const { t, i18n } = useTranslation();
 
   const handleSwitchLang = lng => {
     i18n.changeLanguage(lng);
-    localStorage.setItem('lang', lng);
+    AppStorage.setLang(lng);
   };
 
   return (
     <Dropdown
       overlay={
         <Menu>
-          <Menu.Item onClick={() => handleSwitchLang('en')}>English</Menu.Item>
-          <Menu.Item onClick={() => handleSwitchLang('km')}>ខ្មែរ</Menu.Item>
+          <Menu.Item onClick={() => handleSwitchLang('en')}>{t('en')}</Menu.Item>
+          <Menu.Item onClick={() => handleSwitchLang('km')}>{t('km')}</Menu.Item>
         </Menu>
       }
     >

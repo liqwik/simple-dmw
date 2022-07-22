@@ -28,4 +28,12 @@ export class AppStorage {
   static getViewMode() {
     return localStorage.getItem('viewMode');
   }
+
+  static setLang(value) {
+    localStorage.setItem('lang', value);
+  }
+
+  static getLang() {
+    return localStorage.getItem('lang');
+  }
 }
