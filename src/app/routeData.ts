@@ -8,7 +8,7 @@ import { DocTypePage } from './pages/DocTypePage/Loadable';
 import { InstitutionPage } from './pages/InstitutionPage/Loadable';
 import { UserPage } from './pages/UserPage/Loadable';
 
-const routes = [
+const routes: Array<any> = [
   {
     path: AppRoute.dashboard,
     title: 'Dashboard',
