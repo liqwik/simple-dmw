@@ -108,10 +108,11 @@ function SideBarMenuData({ theme }) {
     );
 
   const transformMenu = menuList => {
-    return menuList.map(({ key, label, navigateTo, icon, children }) => {
+    return menuList.map(({ key, label, disabled, navigateTo, icon, children }) => {
       const menuItem = {
         key,
         icon,
+        disabled,
         label: transformLabel(label, navigateTo),
       };
 
