@@ -1,64 +1,45 @@
-import React, { Component } from 'react';
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Avatar } from 'antd';
 import { AppStorage } from 'utils';
-import './styles.css';
+import { useTranslation } from 'react-i18next';
 
-export class HeaderAvatar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {},
-      displayName: '',
-    };
-  }
+export const HeaderAvatar = () => {
+  const { t } = useTranslation();
+  const [displayName, setDisplayName] = useState('Anonymous');
 
-  componentDidMount() {
+  useEffect(() => {
     const userData = AppStorage.getAuthData();
-    let displayName = 'Anonymous';
-
     if (userData && userData.email) {
-      displayName = userData.email.split('@')[0];
+      setDisplayName(userData.email.split('@')[0]);
     }
+  }, []);
 
-    this.setState({ user: userData, displayName });
-  }
-
-  handleLogout = () => {
+  const handleLogout = () => {
     AppStorage.removeAuthData(true);
   };
 
-  render() {
-    const menuHeaderDropdown = (
-      <Menu>
-        <Menu.Item key="center">
-          <UserOutlined />
-          Account Center
-        </Menu.Item>
-
-        <Menu.Item key="settings">
-          <SettingOutlined />
-          Account Settings
-        </Menu.Item>
-
-        <Menu.Divider />
-
-        <Menu.Item key="logout" onClick={this.handleLogout}>
-          <LogoutOutlined />
-          <span>Logout</span>
-        </Menu.Item>
-      </Menu>
-    );
-
-    return (
-      <div className="avatar-wrapper">
-        <Dropdown overlay={menuHeaderDropdown}>
-          <div>
-            <Avatar style={{ backgroundColor: '#87d068', marginRight: '10px' }} icon={<UserOutlined />} />
-            {/* <span>{this.state.displayName}</span> */}
-          </div>
-        </Dropdown>
-      </div>
-    );
-  }
-}
+  return (
+    <Dropdown
+      placement="bottomLeft"
+      overlay={
+        <Menu
+          items={[
+            {
+              key: 'name',
+              label: displayName,
+            },
+            {
+              key: 'center',
+              label: t('logout'),
+              icon: <LogoutOutlined />,
+              onClick: handleLogout,
+            },
+          ]}
+        />
+      }
+    >
+      <Avatar style={{ backgroundColor: '#87d068', marginRight: '10px' }} icon={<UserOutlined />} />
+    </Dropdown>
+  );
+};
