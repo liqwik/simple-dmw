@@ -9,6 +9,7 @@ import moment from 'moment';
 import { DashboardCard } from 'app/components/Card/DashboardCard';
 import { FcDocument, FcPackage, FcAnswers, FcInspection } from 'react-icons/fc';
 import { parse } from 'path';
+import IconUrgentDoc from 'app/components/UI/Icon/IconUrgentDoc';
 
 function DashboardPage() {
   const [summaryData, setSummaryData] = useState<any>({ normal: '0', urgent: '0', signature: '0' });
@@ -87,7 +88,7 @@ function DashboardPage() {
           <DashboardCard
             title="ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់"
             color="#cf1322"
-            icon={<FcAnswers size="2rem" />}
+            icon={<IconUrgentDoc />}
             value={summaryData?.urgent}
           />
         </Col>
