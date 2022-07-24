@@ -28,5 +28,12 @@
   "letter": "ប្រភពលិខិត",
   "chooseLetter": "ជ្រើសរើសប្រភពលិខិត",
   "en": "English",
-  "km": "ខ្មែរ"
+  "km": "ខ្មែរ",
+  "all": "All",
+  "logout": "Logout",
+  "docStatus": {
+    "normal": "Normal",
+    "urgent": "Urgent",
+    "signature": "Signatured"
+  }
 }

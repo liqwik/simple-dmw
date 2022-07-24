@@ -14,10 +14,20 @@ function SwitchLanguage() {
   return (
     <Dropdown
       overlay={
-        <Menu>
-          <Menu.Item onClick={() => handleSwitchLang('en')}>{t('en')}</Menu.Item>
-          <Menu.Item onClick={() => handleSwitchLang('km')}>{t('km')}</Menu.Item>
-        </Menu>
+        <Menu
+          items={[
+            {
+              key: 'en',
+              label: t('en'),
+              onClick: () => handleSwitchLang('en'),
+            },
+            {
+              key: 'km',
+              label: t('km'),
+              onClick: () => handleSwitchLang('km'),
+            },
+          ]}
+        />
       }
     >
       <div>{t('languages')}</div>
