@@ -29,8 +29,8 @@ export default function LoginPage({ history }) {
     }
   }, [user, history]);
 
-  const handleSubmit = () => {
-    dispatch(actions.loginAction());
+  const handleSubmit = values => {
+    dispatch(actions.loginAction(values));
   };
 
   const handleSubmitFailed = errorInfo => {
