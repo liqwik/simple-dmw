@@ -2,7 +2,6 @@ import React from 'react';
 import { Drawer, Row, Badge, Col, Space, Card, Typography } from 'antd';
 import DateTimeUtil from 'utils/DateTimeUtil';
 import {
-  CheckCircleTwoTone,
   FileTextOutlined,
   CompassTwoTone,
   ExportOutlined,
@@ -13,6 +12,7 @@ import {
 import { displayValue, getUserFullName } from 'utils/string';
 import { DOC_STATUS_LABEL } from 'utils/constants';
 import DescriptionItem from 'app/components/Utilities/Display/DescriptionItem';
+import { FcApproval } from 'react-icons/fc';
 
 const { Title } = Typography;
 
@@ -57,34 +57,34 @@ function DocumentDetail({ item, visible, onClose }: any) {
             <Title level={5} {...cardTitleStyle}>
               ព័ត៌មានឯកសារ
             </Title>
-            {isSign && <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '18px' }} />}
+            {isSign && <FcApproval size="18px" />}
           </Space>
         }
         {...cardProps}
       >
         <Row gutter={[16, 8]}>
           <Col span={12}>
-            <DescriptionItem title="អង្គភាព/ស្ថាប័ន" content={displayValue(institutionId && institutionId.name)} />
+            <DescriptionItem title="អង្គភាព/ស្ថាប័ន" content={institutionId && institutionId.name} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="លិខិតលេខ" content={displayValue(docNo)} />
+            <DescriptionItem title="លិខិតលេខ" content={docNo} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="កាលបរិច្ឆេទលិខិត" content={displayValue(DateTimeUtil.forDisplay(docDate))} />
+            <DescriptionItem title="កាលបរិច្ឆេទលិខិត" content={DateTimeUtil.forDisplay(docDate)} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="ប្រភេទឯកសារ" content={displayValue(docTypeId && docTypeId.name)} />
+            <DescriptionItem title="ប្រភេទឯកសារ" content={docTypeId && docTypeId.name} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="កម្មវត្ថុ" content={displayValue(docDescription)} />
+            <DescriptionItem title="កម្មវត្ថុ" content={docDescription} />
           </Col>
           <Col span={12}>
             <DescriptionItem
               title="ស្ថានភាពឯកសារ"
               content={
                 <Badge
-                  status={docStatus === 'signature' ? 'processing' : docStatus === 'urgent' ? 'error' : 'warning'}
-                  text={displayValue(DOC_STATUS_LABEL[docStatus])}
+                  status={docStatus === 'signature' ? 'success' : docStatus === 'urgent' ? 'error' : 'warning'}
+                  text={DOC_STATUS_LABEL[docStatus]}
                 />
               }
             />
@@ -106,10 +106,10 @@ function DocumentDetail({ item, visible, onClose }: any) {
       >
         <Row gutter={[16, 16]}>
           <Col span={24}>
-            <DescriptionItem title="ចំណារ ឯ.ឧ អភិបាលខេត្ត" content={displayValue(signRemark)} />
+            <DescriptionItem title="ចំណារ ឯ.ឧ អភិបាលខេត្ត" content={signRemark} />
           </Col>
           <Col span={24}>
-            <DescriptionItem title="កាលបរិច្ឆេទចំណារ" content={displayValue(DateTimeUtil.forDisplay(signDate))} />
+            <DescriptionItem title="កាលបរិច្ឆេទចំណារ" content={DateTimeUtil.forDisplay(signDate)} />
           </Col>
         </Row>
       </Card>
@@ -128,13 +128,10 @@ function DocumentDetail({ item, visible, onClose }: any) {
       >
         <Row gutter={[16, 16]}>
           <Col span={12}>
-            <DescriptionItem title="លេខចូលខេត្ត" content={displayValue(docIn && docIn.no)} />
+            <DescriptionItem title="លេខចូលខេត្ត" content={docIn && docIn.no} />
           </Col>
           <Col span={12}>
-            <DescriptionItem
-              title="កាលបរិច្ឆេទចូលខេត្ត"
-              content={displayValue(DateTimeUtil.forDisplay(docIn && docIn.date))}
-            />
+            <DescriptionItem title="កាលបរិច្ឆេទចូលខេត្ត" content={DateTimeUtil.forDisplay(docIn && docIn.date)} />
           </Col>
           <Col span={12}>
             <DescriptionItem
@@ -142,10 +139,9 @@ function DocumentDetail({ item, visible, onClose }: any) {
               content={getUserFullName(docIn && docIn.sender)}
               style={{ marginBottom: 0 }}
             />
-            <DescriptionItem
-              title="កាលបរិច្ឆេទប្រគល់"
-              content={displayValue(DateTimeUtil.forDisplay(docIn && docIn.senderDate))}
-            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="កាលបរិច្ឆេទប្រគល់" content={DateTimeUtil.forDisplay(docIn && docIn.senderDate)} />
           </Col>
           <Col span={12}>
             <DescriptionItem
@@ -153,10 +149,9 @@ function DocumentDetail({ item, visible, onClose }: any) {
               content={getUserFullName(docIn && docIn.receiver)}
               style={{ marginBottom: 0 }}
             />
-            <DescriptionItem
-              title="កាលបរិច្ឆេទទទួល"
-              content={displayValue(DateTimeUtil.forDisplay(docIn && docIn.receiverDate))}
-            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="កាលបរិច្ឆេទទទួល" content={DateTimeUtil.forDisplay(docIn && docIn.receiverDate)} />
           </Col>
         </Row>
       </Card>
@@ -175,10 +170,7 @@ function DocumentDetail({ item, visible, onClose }: any) {
       >
         <Row gutter={[16, 16]}>
           <Col span={24}>
-            <DescriptionItem
-              title="កាលបរិច្ឆេទបញ្ចេញឯកសារ"
-              content={displayValue(DateTimeUtil.forDisplay(docOut && docOut.date))}
-            />
+            <DescriptionItem title="កាលបរិច្ឆេទបញ្ចេញឯកសារ" content={DateTimeUtil.forDisplay(docOut && docOut.date)} />
           </Col>
           <Col span={12}>
             <DescriptionItem
@@ -186,10 +178,9 @@ function DocumentDetail({ item, visible, onClose }: any) {
               content={getUserFullName(docOut && docOut.sender)}
               style={{ marginBottom: 0 }}
             />
-            <DescriptionItem
-              title="កាលបរិច្ឆេទប្រគល់"
-              content={displayValue(DateTimeUtil.forDisplay(docOut && docOut.senderDate))}
-            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="កាលបរិច្ឆេទប្រគល់" content={DateTimeUtil.forDisplay(docOut && docOut.senderDate)} />
           </Col>
           <Col span={12}>
             <DescriptionItem
@@ -197,10 +188,9 @@ function DocumentDetail({ item, visible, onClose }: any) {
               content={getUserFullName(docOut && docOut.receiver)}
               style={{ marginBottom: 0 }}
             />
-            <DescriptionItem
-              title="កាលបរិច្ឆេទទទួល"
-              content={displayValue(DateTimeUtil.forDisplay(docOut && docOut.receiverDate))}
-            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="កាលបរិច្ឆេទទទួល" content={DateTimeUtil.forDisplay(docOut && docOut.receiverDate)} />
           </Col>
         </Row>
       </Card>
@@ -219,7 +209,7 @@ function DocumentDetail({ item, visible, onClose }: any) {
       >
         <Row gutter={[16, 16]}>
           <Col span={24}>
-            <DescriptionItem title="កំណត់ត្រាផ្សេងៗ" content={displayValue(remark)} />
+            <DescriptionItem title="កំណត់ត្រាផ្សេងៗ" content={remark} />
           </Col>
 
           {resourceLink && (

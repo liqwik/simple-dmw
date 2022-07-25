@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Popover, Typography } from 'antd';
-import { CheckCircleTwoTone } from '@ant-design/icons';
 import DateTimeUtil from 'utils/DateTimeUtil';
+import { FcApproval } from 'react-icons/fc';
 
 const { Text } = Typography;
 
-const SignRemark: React.FC<any> = ({ remark, date }) => {
+const SignRemark = ({ remark, date }) => {
   return (
     <Popover
       content={remark}
@@ -13,10 +13,7 @@ const SignRemark: React.FC<any> = ({ remark, date }) => {
       trigger="click"
       overlayClassName="popover-sign"
     >
-      <Button
-        shape="circle"
-        icon={<CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '24px', display: 'block' }} />}
-      />
+      <Button type="text" shape="circle" icon={<FcApproval size="28px" />} />
     </Popover>
   );
 };
