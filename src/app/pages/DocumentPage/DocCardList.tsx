@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, Col, Divider, Row, Space, Tag, Typography } from 'antd';
 import DisplayDateTime from 'app/components/DateTime/DisplayDateTime';
-import { displayValue, getUserFullName } from 'utils/string';
+import { getUserFullName } from 'utils/string';
 import DescriptionItem from 'app/components/Utilities/Display/DescriptionItem';
 import { DOC_STATUS_LABEL } from 'utils/constants';
 import SignRemark from './components/SignRemark';
@@ -29,39 +29,37 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
     docStatus,
   } = item;
 
-  console.log(loading, pagination, onPageChange);
+  const handleNavigateToEdit = () => `${AppRoute.document}/edit/${item.id}`;
+  const handleExportFile = () => `${ApiRoute.document(item.id)}/export`;
+
+  const handlePrintDocument = () => onPrintDoc({ filePath: `${ApiRoute.document(item.id)}/export` });
+  const handleViewDetail = () => onViewDetail(item);
+
   return (
     <Card
       size="small"
       title={
         <Space direction="vertical" size={0}>
-          <Button
-            type="link"
-            style={{ padding: '0', fontSize: '1rem', fontWeight: 'bold' }}
-            onClick={() => onViewDetail(item)}
-          >
+          <Button type="link" style={{ padding: '0', fontSize: '1rem', fontWeight: 'bold' }} onClick={handleViewDetail}>
             {docNo}
           </Button>
           <DisplayDateTime value={docDate} />
         </Space>
       }
       actions={[
-        <EditButton key="edit" to={`${AppRoute.document}/edit/${item.id}`} />,
-        <PrintButton key="print" onPrint={() => onPrintDoc({ filePath: `${ApiRoute.document(item.id)}/export` })} />,
-        <DownloadButton key="download" src={`${ApiRoute.document(item.id)}/export`} />,
+        <EditButton key="edit" to={handleNavigateToEdit()} />,
+        <PrintButton key="print" onPrint={handlePrintDocument} />,
+        <DownloadButton key="download" src={handleExportFile()} />,
       ]}
     >
-      <Row>
-        <Col span={16}>
-          <DescriptionItem title="អង្គភាព/ស្ថាប័ន" content={displayValue(institutionId && institutionId.name)} />
+      <Row gutter={[8, 8]}>
+        <Col span={12}>
+          <DescriptionItem title="អង្គភាព/ស្ថាប័ន" content={institutionId && institutionId.name} />
         </Col>
-        <Col span={8}>
-          <DescriptionItem title="ប្រភេទឯកសារ" content={displayValue(docTypeId && docTypeId.name)} />
+        <Col span={12}>
+          <DescriptionItem title="ប្រភេទឯកសារ" content={docTypeId && docTypeId.name} />
         </Col>
-      </Row>
-
-      <Row>
-        <Col span={16}>
+        <Col span={12}>
           <DescriptionItem
             title="ស្ថានភាពឯកសារ"
             content={
@@ -71,33 +69,35 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
             }
           />
         </Col>
-
-        <Col span={8}>
+        <Col span={12}>
           <DescriptionItem title="ចំណារឯកសារ" content={isSign && <SignRemark remark={signRemark} date={signDate} />} />
         </Col>
         <Col span={24}>
           <DescriptionItem
             title="កម្មវត្ថុ"
+            style={{ width: '100%' }}
             content={
-              <Paragraph ellipsis={{ rows: 1, expandable: true, symbol: 'អានបន្ថែម' }}>
-                {displayValue(docDescription)}
-              </Paragraph>
+              docDescription && (
+                <Paragraph ellipsis={{ rows: 1, expandable: true, symbol: 'អានបន្ថែម' }}>{docDescription}</Paragraph>
+              )
             }
           />
         </Col>
       </Row>
 
-      <Divider>
-        <Text strong>ឯកសារចូល</Text>
+      <Divider style={{ margin: 0 }}>
+        <Text keyboard strong>
+          ឯកសារចូល
+        </Text>
       </Divider>
 
-      <Row>
+      <Row gutter={[8, 8]}>
         <Col span={24}>
           <DescriptionItem
             title="លេខចូលខេត្ត"
             content={
               <Space direction="vertical" size={0}>
-                <Text>{displayValue(docIn && docIn.no)}</Text>
+                <Text>{docIn && docIn.no}</Text>
                 <DisplayDateTime value={docIn && docIn.date} />
               </Space>
             }
@@ -130,10 +130,12 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
       </Row>
 
       <Divider>
-        <Text strong>ឯកសារចេញ</Text>
+        <Text keyboard strong>
+          ឯកសារចេញ
+        </Text>
       </Divider>
 
-      <Row>
+      <Row gutter={[8, 8]}>
         <Col span={24}>
           <DescriptionItem title="កាលបរិច្ឆេទបញ្ចេញឯកសារ" content={<DisplayDateTime value={docOut && docOut.date} />} />
         </Col>
