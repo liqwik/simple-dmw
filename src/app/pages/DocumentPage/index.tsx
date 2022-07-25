@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Pagination, Radio, Row } from 'antd';
-
+import { Card, Col, Pagination, Row, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import AppRoute from 'utils/AppRoute';
 import { ITEM_LIMIT, listViewMode } from 'utils/constants';
@@ -112,10 +111,9 @@ export function DocumentPage({ location }: Props) {
     }
   };
 
-  const handleSwitchViewMode = e => {
-    const viewModeValue = e.target.value;
-    AppStorage.setViewMode(viewModeValue);
-    setViewMode(viewModeValue);
+  const handleSwitchViewMode = value => {
+    setViewMode(value);
+    AppStorage.setViewMode(value);
   };
 
   const handlePrintDoc = ({ filePath }) => {
@@ -157,6 +155,16 @@ export function DocumentPage({ location }: Props) {
                 defaultCurrent={1}
                 pageSize={filterQuery.limit * 1}
                 current={filterQuery.page * 1}
+                onChange={(page, pageSize) => {
+                  handlePageChange(
+                    {
+                      pageSize,
+                      current: page,
+                    },
+                    {},
+                    {},
+                  );
+                }}
               />
             </Col>
           </Row>
@@ -199,15 +207,18 @@ export function DocumentPage({ location }: Props) {
         <Col span={24}>
           <Card bordered={false}>
             <Row justify="space-between">
-              <SearchFilterBar
-                showReset={filterQuery.q || filterQuery.sb || filterQuery.fq}
-                value={filterQuery.q}
-                onReset={handleResetFilter}
-                onSearch={handleSearch}
-                onFilter={handleFilter}
-              />
-
-              <ToggleViewMode mode={viewMode} onSwitchViewMode={handleSwitchViewMode} />
+              <Col span={20}>
+                <SearchFilterBar
+                  showReset={filterQuery.q || filterQuery.sb || filterQuery.fq}
+                  value={filterQuery.q}
+                  onReset={handleResetFilter}
+                  onSearch={handleSearch}
+                  onFilter={handleFilter}
+                />
+              </Col>
+              <Col flex="right">
+                <ToggleViewMode mode={viewMode} onSwitchViewMode={handleSwitchViewMode} />
+              </Col>
             </Row>
           </Card>
         </Col>
