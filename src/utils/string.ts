@@ -29,7 +29,7 @@ export const displayValue = value => {
 };
 
 export const getUserFullName = user => {
-  if (!user) return 'គ្មានទិន្នន័យ';
+  if (!user) return null;
 
   return `${user.fn} ${user.ln}`;
 };
