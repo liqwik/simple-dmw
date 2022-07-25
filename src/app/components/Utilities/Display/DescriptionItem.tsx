@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { Space, Typography } from 'antd';
+import { MinusOutlined } from '@ant-design/icons';
 
-const DescriptionItem: React.FC<any> = ({ title, content, ...props }) => {
+interface DescriptionItemProps {
+  title: string;
+  content: string | ReactNode;
+  [props: string]: any;
+}
+
+const { Text } = Typography;
+
+const DescriptionItem = ({ title, content, ...props }: DescriptionItemProps) => {
   return (
-    <div className="description-wrapper" {...props}>
-      <p className="item-headline">{title}</p>
-      <p className="item-label">{content}</p>
-    </div>
+    <Space direction="vertical" size={0} {...props}>
+      <Text strong style={{ fontSize: '0.95rem' }}>
+        {title}
+      </Text>
+      {content ? <Text style={{ fontSize: '0.95rem', color: '#333' }}>{content}</Text> : <MinusOutlined />}
+    </Space>
   );
 };
 
