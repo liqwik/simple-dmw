@@ -9,26 +9,30 @@ const columns = [
     dataIndex: 'name',
   },
   {
-    title: 'មានចំណារ',
+    title: 'ឯកសារមានចំណារ',
     children: [
       {
-        title: 'ឯកសារធម្មតា',
+        title: 'ធម្មតា',
         dataIndex: 'totalDoc.signed.normal',
+        align: 'center',
         render: (_e, record) => <Text>{record?.totalDoc?.signed?.normal || 0}</Text>,
       },
       {
         title: 'ប្រញាប់',
         dataIndex: 'totalDoc.signed.urgent',
+        align: 'center',
         render: (_e, record) => <Text>{record?.totalDoc?.signed?.urgent || 0}</Text>,
       },
       {
-        title: 'ឯកសារបានចាររួច',
+        title: 'បានចាររួច',
         dataIndex: 'totalDoc.signed.signature',
+        align: 'center',
         render: (_e, record) => <Text>{record?.totalDoc?.signed?.signature || 0}</Text>,
       },
       {
-        title: <Text strong>ចំនួនលិខិតសរុប</Text>,
+        title: <Text strong>សរុប</Text>,
         dataIndex: 'id',
+        align: 'center',
         render: (_e, record) => {
           let total = 0;
           total += record?.totalDoc?.signed?.normal || 0;
@@ -41,26 +45,24 @@ const columns = [
     ],
   },
   {
-    title: 'មិនទាន់ចារ',
+    title: 'ឯកសារមិនទាន់ចារ',
     children: [
       {
-        title: 'ឯកសារធម្មតា',
+        title: 'ធម្មតា',
         dataIndex: 'totalDoc.not_sign.normal',
+        align: 'center',
         render: (_e, record) => <Text>{record?.totalDoc?.not_sign?.normal || 0}</Text>,
       },
       {
         title: 'ប្រញាប់',
         dataIndex: 'totalDoc.not_sign.urgent',
+        align: 'center',
         render: (_e, record) => <Text>{record?.totalDoc?.not_sign?.urgent || 0}</Text>,
       },
       {
-        title: 'ឯកសារបានចាររួច',
-        dataIndex: 'totalDoc.not_sign.signature',
-        render: (_e, record) => <Text>{record?.totalDoc?.not_sign?.signature || 0}</Text>,
-      },
-      {
-        title: <Text strong>ចំនួនលិខិតសរុប</Text>,
+        title: <Text strong>សរុប</Text>,
         dataIndex: 'id',
+        align: 'center',
         render: (_e, record) => {
           let total = 0;
           total += record?.totalDoc?.not_sign?.normal || 0;
@@ -108,28 +110,25 @@ function DocTypeReport({ data }) {
           <>
             <Table.Summary.Row style={{ backgroundColor: '#ccc' }}>
               <Table.Summary.Cell index={1}>សរុប</Table.Summary.Cell>
-              <Table.Summary.Cell index={2}>
+              <Table.Summary.Cell index={2} align="center">
                 <Text>{signed.normal}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={3}>
+              <Table.Summary.Cell index={3} align="center">
                 <Text>{signed.urgent}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={4}>
+              <Table.Summary.Cell index={4} align="center">
                 <Text>{signed.signature}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={5}>
+              <Table.Summary.Cell index={5} align="center">
                 <Text>{signed.normal + signed.urgent + signed.signature}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={6}>
+              <Table.Summary.Cell index={6} align="center">
                 <Text>{notSign.normal}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={7}>
+              <Table.Summary.Cell index={7} align="center">
                 <Text>{notSign.urgent}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={8}>
-                <Text>{notSign.signature}</Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={9}>
+              <Table.Summary.Cell index={9} align="center">
                 <Text>{notSign.normal + notSign.urgent + notSign.signature}</Text>
               </Table.Summary.Cell>
             </Table.Summary.Row>
