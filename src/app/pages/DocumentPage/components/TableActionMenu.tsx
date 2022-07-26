@@ -4,20 +4,27 @@ import { MoreOutlined } from '@ant-design/icons';
 import EditButton from './EditButton';
 import DownloadButton from './DownloadButton';
 import PrintButton from './PrintButton';
+import { AppStorage } from 'utils';
 
 function TableActionMenu({ editRoute, downloadSrc, onPrintDoc }) {
+  const isAdmin = AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin;
+
   return (
     <Dropdown
       placement="bottomRight"
       overlay={
         <Menu>
-          <Menu.Item key="0">
-            <PrintButton onPrint={onPrintDoc} />
-          </Menu.Item>
-          <Menu.Item key="1">
-            <DownloadButton src={downloadSrc} />
-          </Menu.Item>
-          <Menu.Divider />
+          {isAdmin && (
+            <>
+              <Menu.Item key="0">
+                <PrintButton onPrint={onPrintDoc} />
+              </Menu.Item>
+              <Menu.Item key="1">
+                <DownloadButton src={downloadSrc} />
+              </Menu.Item>
+              <Menu.Divider />
+            </>
+          )}
           <Menu.Item key="2">
             <EditButton to={editRoute} />
           </Menu.Item>
