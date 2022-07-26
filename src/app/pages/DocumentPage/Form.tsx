@@ -60,8 +60,6 @@ export default function DocumentForm({
           date: docOut && docOut.date && moment(docOut.date),
           sender: docOut && docOut.sender && docOut.sender.id,
           receiver: docOut && docOut.receiver && docOut.receiver.id,
-          senderDate: docOut && docOut.senderDate && moment(docOut.senderDate),
-          receiverDate: docOut && docOut.receiverDate && moment(docOut.receiverDate),
         },
         issueDate: issueDate && moment(issueDate),
         receivedDate: receivedDate && moment(receivedDate),
@@ -255,12 +253,12 @@ export default function DocumentForm({
                 </Card>
               )}
 
-              <Card title="ឯកសារចេញ" {...cardOpts}>
-                <Form.Item name={['docOut', 'date']} label="កាលបរិច្ឆេទបញ្ចេញឯកសារ">
-                  <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
-                </Form.Item>
+              {isAdmin && (
+                <Card title="ឯកសារចេញ" {...cardOpts}>
+                  <Form.Item name={['docOut', 'date']} label="កាលបរិច្ឆេទបញ្ចេញឯកសារ">
+                    <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
+                  </Form.Item>
 
-                {isAdmin && (
                   <Card
                     title="ព័ត៌មានអ្នកប្រគល់ និងអ្នកទទួល"
                     bordered={false}
@@ -289,12 +287,6 @@ export default function DocumentForm({
                           {...fieldVerticle}
                         />
                       </Col>
-
-                      <Col span={8}>
-                        <Form.Item name={['docOut', 'senderDate']} {...fieldVerticle}>
-                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
-                        </Form.Item>
-                      </Col>
                     </Row>
 
                     <Row gutter={8}>
@@ -313,16 +305,10 @@ export default function DocumentForm({
                           {...fieldVerticle}
                         />
                       </Col>
-
-                      <Col span={8}>
-                        <Form.Item name={['docOut', 'receiverDate']} {...fieldVerticle}>
-                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
-                        </Form.Item>
-                      </Col>
                     </Row>
                   </Card>
-                )}
-              </Card>
+                </Card>
+              )}
 
               {isAdmin && (
                 <Card title="ព័ត៌មានបន្ថែម" {...cardOpts}>

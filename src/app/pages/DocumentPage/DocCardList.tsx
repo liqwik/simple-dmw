@@ -142,24 +142,14 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
         <Col span={12}>
           <DescriptionItem
             title="អ្នកប្រគល់ឯកសារ"
-            content={
-              <Space direction="vertical" size={0}>
-                {getUserFullName(docOut && docOut.sender)}
-                <DisplayDateTime value={docOut && docOut.senderDate} />
-              </Space>
-            }
+            content={getUserFullName(docOut && docOut.sender)}
             style={{ marginBottom: 0 }}
           />
         </Col>
         <Col span={12}>
           <DescriptionItem
             title="អ្នកទទួលឯកសារ"
-            content={
-              <Space direction="vertical" size={0}>
-                {getUserFullName(docOut && docOut.receiver)}
-                <DisplayDateTime value={docOut && docOut.receiverDate} />
-              </Space>
-            }
+            content={getUserFullName(docOut && docOut.receiver)}
             style={{ marginBottom: 0 }}
           />
         </Col>

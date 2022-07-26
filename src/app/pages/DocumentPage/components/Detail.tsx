@@ -172,25 +172,19 @@ function DocumentDetail({ item, visible, onClose }: any) {
           <Col span={24}>
             <DescriptionItem title="កាលបរិច្ឆេទបញ្ចេញឯកសារ" content={DateTimeUtil.forDisplay(docOut && docOut.date)} />
           </Col>
-          <Col span={12}>
+          <Col span={24}>
             <DescriptionItem
               title="អ្នកប្រគល់ឯកសារ"
               content={getUserFullName(docOut && docOut.sender)}
               style={{ marginBottom: 0 }}
             />
           </Col>
-          <Col span={12}>
-            <DescriptionItem title="កាលបរិច្ឆេទប្រគល់" content={DateTimeUtil.forDisplay(docOut && docOut.senderDate)} />
-          </Col>
-          <Col span={12}>
+          <Col span={24}>
             <DescriptionItem
               title="អ្នកទទួលឯកសារ"
               content={getUserFullName(docOut && docOut.receiver)}
               style={{ marginBottom: 0 }}
             />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="កាលបរិច្ឆេទទទួល" content={DateTimeUtil.forDisplay(docOut && docOut.receiverDate)} />
           </Col>
         </Row>
       </Card>
