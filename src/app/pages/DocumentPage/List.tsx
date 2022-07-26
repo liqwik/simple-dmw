@@ -28,7 +28,6 @@ export function DocumentList({ items, loading, pagination, onViewDetail, onPageC
       title: <Text strong>ស្ថានភាពឯកសារ</Text>,
       dataIndex: 'docStatus',
       key: 'id',
-      align: 'center',
       width: 120,
       render: (_e, record) => <DocStatus value={record.docStatus} />,
     },
@@ -41,14 +40,13 @@ export function DocumentList({ items, loading, pagination, onViewDetail, onPageC
       ),
       dataIndex: 'docNo',
       key: 'id',
-      align: 'center',
       width: 220,
       render: (_e, record) => {
         const { institutionId } = record;
 
         return (
           <div>
-            <Button type="link" onClick={() => onViewDetail(record)}>
+            <Button type="link" style={{ padding: 0 }} onClick={() => onViewDetail(record)}>
               {record.docNo}
             </Button>
             <br />
