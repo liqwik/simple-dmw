@@ -91,6 +91,12 @@ function SideBarMenuData({ theme }) {
 
   const officerMenu = [
     {
+      key: 'dashboard',
+      label: t('dashboard'),
+      navigateTo: AppRoute.dashboard,
+      icon: <DashboardTwoTone />,
+    },
+    {
       key: 'document',
       label: t('doc.mgmt'),
       navigateTo: AppRoute.document,
