@@ -11,10 +11,12 @@ import AppRoute from 'utils/AppRoute';
 import PrintButton from './components/PrintButton';
 import DownloadButton from './components/DownloadButton';
 import { ApiRoute } from 'utils';
+import { FcApproval } from 'react-icons/fc';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 
-function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, onPrintDoc }) {
+function DocCardList({ isAdmin, item, loading, pagination, onViewDetail, onPageChange, onPrintDoc }) {
   const {
     docNo,
     docTypeId,
@@ -29,11 +31,27 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
     docStatus,
   } = item;
 
+  const { t } = useTranslation();
+
   const handleNavigateToEdit = () => `${AppRoute.document}/edit/${item.id}`;
   const handleExportFile = () => `${ApiRoute.document(item.id)}/export`;
 
   const handlePrintDocument = () => onPrintDoc({ filePath: `${ApiRoute.document(item.id)}/export` });
   const handleViewDetail = () => onViewDetail(item);
+
+  const actionsButton = () => {
+    let actions = [<EditButton key="edit" to={handleNavigateToEdit()} />];
+
+    if (!isAdmin) {
+      actions = [
+        ...actions,
+        <PrintButton key="print" onPrint={handlePrintDocument} />,
+        <DownloadButton key="download" src={handleExportFile()} />,
+      ];
+    }
+
+    return actions;
+  };
 
   return (
     <Card
@@ -46,11 +64,7 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
           <DisplayDateTime value={docDate} />
         </Space>
       }
-      actions={[
-        <EditButton key="edit" to={handleNavigateToEdit()} />,
-        <PrintButton key="print" onPrint={handlePrintDocument} />,
-        <DownloadButton key="download" src={handleExportFile()} />,
-      ]}
+      actions={actionsButton()}
     >
       <Row gutter={[8, 8]}>
         <Col span={12}>
@@ -70,7 +84,12 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
           />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="ចំណារឯកសារ" content={isSign && <SignRemark remark={signRemark} date={signDate} />} />
+          <DescriptionItem
+            title="ចំណារឯកសារ"
+            content={
+              isSign && isAdmin ? <SignRemark remark={signRemark} date={signDate} /> : <FcApproval size="28px" />
+            }
+          />
         </Col>
         <Col span={24}>
           <DescriptionItem
@@ -87,7 +106,7 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
 
       <Divider style={{ margin: 0 }}>
         <Text keyboard strong>
-          ឯកសារចូល
+          {t('label.docIn')}
         </Text>
       </Divider>
 
@@ -103,57 +122,68 @@ function DocCardList({ item, loading, pagination, onViewDetail, onPageChange, on
             }
           />
         </Col>
-        <Col span={12}>
-          <DescriptionItem
-            title="អ្នកប្រគល់ឯកសារ"
-            content={
-              <Space direction="vertical" size={0}>
-                {getUserFullName(docIn && docIn.sender)}
-                <DisplayDateTime value={docIn && docIn.senderDate} />
-              </Space>
-            }
-            style={{ marginBottom: 0 }}
-          />
-        </Col>
-        <Col span={12}>
-          <DescriptionItem
-            title="អ្នកទទួលឯកសារ"
-            content={
-              <Space direction="vertical" size={0}>
-                {getUserFullName(docIn && docIn.receiver)}
-                <DisplayDateTime value={docIn && docIn.receiverDate} />
-              </Space>
-            }
-            style={{ marginBottom: 0 }}
-          />
-        </Col>
+        {isAdmin && (
+          <>
+            <Col span={12}>
+              <DescriptionItem
+                title="អ្នកប្រគល់ឯកសារ"
+                content={
+                  <Space direction="vertical" size={0}>
+                    {getUserFullName(docIn && docIn.sender)}
+                    <DisplayDateTime value={docIn && docIn.senderDate} />
+                  </Space>
+                }
+                style={{ marginBottom: 0 }}
+              />
+            </Col>
+            <Col span={12}>
+              <DescriptionItem
+                title="អ្នកទទួលឯកសារ"
+                content={
+                  <Space direction="vertical" size={0}>
+                    {getUserFullName(docIn && docIn.receiver)}
+                    <DisplayDateTime value={docIn && docIn.receiverDate} />
+                  </Space>
+                }
+                style={{ marginBottom: 0 }}
+              />
+            </Col>
+          </>
+        )}
       </Row>
 
-      <Divider>
-        <Text keyboard strong>
-          ឯកសារចេញ
-        </Text>
-      </Divider>
+      {isAdmin && (
+        <Divider>
+          <Text keyboard strong>
+            {t('label.docOut')}
+          </Text>
+        </Divider>
+      )}
 
-      <Row gutter={[8, 8]}>
-        <Col span={24}>
-          <DescriptionItem title="កាលបរិច្ឆេទបញ្ចេញឯកសារ" content={<DisplayDateTime value={docOut && docOut.date} />} />
-        </Col>
-        <Col span={12}>
-          <DescriptionItem
-            title="អ្នកប្រគល់ឯកសារ"
-            content={getUserFullName(docOut && docOut.sender)}
-            style={{ marginBottom: 0 }}
-          />
-        </Col>
-        <Col span={12}>
-          <DescriptionItem
-            title="អ្នកទទួលឯកសារ"
-            content={getUserFullName(docOut && docOut.receiver)}
-            style={{ marginBottom: 0 }}
-          />
-        </Col>
-      </Row>
+      {isAdmin && (
+        <Row gutter={[8, 8]}>
+          <Col span={24}>
+            <DescriptionItem
+              title="កាលបរិច្ឆេទបញ្ចេញឯកសារ"
+              content={<DisplayDateTime value={docOut && docOut.date} />}
+            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem
+              title="អ្នកប្រគល់ឯកសារ"
+              content={getUserFullName(docOut && docOut.sender)}
+              style={{ marginBottom: 0 }}
+            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem
+              title="អ្នកទទួលឯកសារ"
+              content={getUserFullName(docOut && docOut.receiver)}
+              style={{ marginBottom: 0 }}
+            />
+          </Col>
+        </Row>
+      )}
     </Card>
   );
 }

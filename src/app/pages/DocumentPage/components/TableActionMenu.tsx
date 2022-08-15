@@ -4,17 +4,18 @@ import { MoreOutlined } from '@ant-design/icons';
 import EditButton from './EditButton';
 import DownloadButton from './DownloadButton';
 import PrintButton from './PrintButton';
-import { AppStorage } from 'utils';
+import { useSelector } from 'react-redux';
+import { selectLogin } from 'app/pages/AuthPage/slice/selectors';
 
 function TableActionMenu({ editRoute, downloadSrc, onPrintDoc }) {
-  const isAdmin = AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin;
+  const { isAdmin } = useSelector(selectLogin);
 
   return (
     <Dropdown
       placement="bottomRight"
       overlay={
         <Menu>
-          {isAdmin && (
+          {!isAdmin && (
             <>
               <Menu.Item key="0">
                 <PrintButton onPrint={onPrintDoc} />

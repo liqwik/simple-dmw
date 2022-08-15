@@ -17,6 +17,8 @@ import DocCardList from './DocCardList';
 import printJS from 'print-js';
 import ToggleViewMode from './components/ToggleViewMode';
 import { AppStorage } from 'utils';
+import { OfficerListView } from './components/OfficerListView';
+import { selectLogin } from '../AuthPage/slice/selectors';
 
 interface Props {
   location?: any;
@@ -25,6 +27,7 @@ interface Props {
 export function DocumentPage({ location }: Props) {
   const dispatch = useDispatch();
   const { actions } = useDocumentSlice();
+  const { isAdmin } = useSelector(selectLogin);
   const { items, totalItem, serviceError, isLoading } = useSelector(selectDocument);
 
   const { path } = useRouteMatch();
@@ -133,6 +136,7 @@ export function DocumentPage({ location }: Props) {
               items.map(item => (
                 <Col span={8} key={item.id}>
                   <DocCardList
+                    isAdmin={isAdmin}
                     item={item}
                     loading={isLoading}
                     pagination={{
@@ -175,18 +179,33 @@ export function DocumentPage({ location }: Props) {
     return (
       <Col span={24}>
         <Card bordered={false}>
-          <DocumentList
-            items={items}
-            loading={isLoading}
-            pagination={{
-              total: totalItem,
-              pageSize: filterQuery.limit * 1,
-              current: filterQuery.page * 1,
-            }}
-            onViewDetail={handleViewDetail}
-            onPageChange={handlePageChange}
-            onPrintDoc={handlePrintDoc}
-          />
+          {isAdmin ? (
+            <DocumentList
+              items={items}
+              loading={isLoading}
+              pagination={{
+                total: totalItem,
+                pageSize: filterQuery.limit * 1,
+                current: filterQuery.page * 1,
+              }}
+              onViewDetail={handleViewDetail}
+              onPageChange={handlePageChange}
+              onPrintDoc={handlePrintDoc}
+            />
+          ) : (
+            <OfficerListView
+              items={items}
+              loading={isLoading}
+              pagination={{
+                total: totalItem,
+                pageSize: filterQuery.limit * 1,
+                current: filterQuery.page * 1,
+              }}
+              onViewDetail={handleViewDetail}
+              onPageChange={handlePageChange}
+              onPrintDoc={handlePrintDoc}
+            />
+          )}
         </Card>
       </Col>
     );
