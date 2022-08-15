@@ -9,8 +9,11 @@ import { ColumnsType } from 'antd/lib/table';
 import TableActionMenu from './components/TableActionMenu';
 import DocStatus from './components/DocStatus';
 import SignRemark from './components/SignRemark';
+import { useTranslation } from 'react-i18next';
 
 export function DocumentList({ items, loading, pagination, onViewDetail, onPageChange, onPrintDoc }) {
+  const { t } = useTranslation();
+
   const columns: ColumnsType<any> = [
     {
       title: <Text strong>ល.រ</Text>,
@@ -60,7 +63,7 @@ export function DocumentList({ items, loading, pagination, onViewDetail, onPageC
       },
     },
     {
-      title: <Text strong>ឯកសារចូល</Text>,
+      title: <Text strong>{t('label.docIn')}</Text>,
       align: 'center',
       children: [
         {
@@ -105,7 +108,7 @@ export function DocumentList({ items, loading, pagination, onViewDetail, onPageC
     },
 
     {
-      title: <Text strong>ឯកសារចេញ</Text>,
+      title: <Text strong>{t('label.docOut')}</Text>,
       align: 'center',
       children: [
         {

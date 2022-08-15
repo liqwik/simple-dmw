@@ -3,8 +3,11 @@ import { Table, Button, Space } from 'antd';
 import DateTimeUtil from 'utils/DateTimeUtil';
 import Text from 'antd/lib/typography/Text';
 import { DOC_STATUS_LABEL } from 'utils/constants';
+import { useTranslation } from 'react-i18next';
 
 function HomeList({ items, loading, pagination, onViewDetail, onPageChange }: any) {
+  const { t } = useTranslation();
+
   return (
     <Table
       bordered
@@ -52,7 +55,6 @@ function HomeList({ items, loading, pagination, onViewDetail, onPageChange }: an
               title: <Text strong>អង្គភាព/ស្ថាប័ន</Text>,
               dataIndex: 'institutionId',
               key: 'id',
-              align: 'center',
               render: (e, record) => {
                 const { institutionId } = record;
                 return (
@@ -85,7 +87,7 @@ function HomeList({ items, loading, pagination, onViewDetail, onPageChange }: an
           ],
         },
         {
-          title: <Text strong>ឯកសារចូល</Text>,
+          title: <Text strong>{t('label.docIn')}</Text>,
           dataIndex: 'docIn.date',
           key: 'id',
           align: 'center',
@@ -104,7 +106,7 @@ function HomeList({ items, loading, pagination, onViewDetail, onPageChange }: an
           },
         },
         {
-          title: <Text strong>ឯកសារចេញ</Text>,
+          title: <Text strong>{t('label.docOut')}</Text>,
           dataIndex: 'docOut.date',
           key: 'id',
           align: 'center',
