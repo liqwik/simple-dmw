@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { AppStorage } from 'utils';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { loginSaga } from './saga';
@@ -6,6 +7,7 @@ import { LoginState } from './types';
 
 export const initialState: LoginState = {
   user: {},
+  isAdmin: AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin,
   loading: false,
   error: '',
 };
@@ -23,6 +25,7 @@ const authSlice = createSlice({
     loginSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.user = action.payload;
+      state.isAdmin = action.payload.isAdmin;
     },
 
     loginFailed(state, action: PayloadAction<any>) {
