@@ -12,6 +12,7 @@ import { DOC_STATUS_LABEL } from 'utils/constants';
 import { InstitutionDropdown } from 'app/features/InstitutionDropdown/InstitutionDropdown';
 import { UserDropdown } from 'app/features/UserDropdown';
 import DateTimeUtil from 'utils/DateTimeUtil';
+import { useTranslation } from 'react-i18next';
 
 type IDocumentForm = {
   form: FormInstance;
@@ -32,6 +33,7 @@ export default function DocumentForm({
   serviceError,
   onSubmit,
 }: IDocumentForm) {
+  const { t } = useTranslation();
   const [docTypeList]: any = useDocType();
   const isAdmin = AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin;
 
@@ -53,7 +55,6 @@ export default function DocumentForm({
           sender: docIn && docIn.sender && docIn.sender.id,
           receiver: docIn && docIn.receiver && docIn.receiver.id,
           senderDate: docIn && docIn.senderDate && moment(docIn.senderDate),
-          receiverDate: docIn && docIn.receiverDate && moment(docIn.receiverDate),
         },
         docOut: {
           ...docOut,
@@ -79,7 +80,6 @@ export default function DocumentForm({
         ...docIn,
         date: docIn && docIn.date && docIn.date.format(defaultDateFormat),
         senderDate: docIn && docIn.senderDate && docIn.senderDate.format(defaultDateFormat),
-        receiverDate: docIn && docIn.receiverDate && docIn.receiverDate.format(defaultDateFormat),
       },
       docOut: {
         ...docOut,
@@ -177,7 +177,7 @@ export default function DocumentForm({
                 </Form.Item>
               </Card>
 
-              <Card title="ឯកសារចូល" {...cardOpts}>
+              <Card title={t('label.docIn')} {...cardOpts}>
                 <MyTextInput name={['docIn', 'no']} label="លេខចូលខេត្ត" />
 
                 <Form.Item name={['docIn', 'date']} label="កាលបរិច្ឆេទចូលខេត្ត">
@@ -231,11 +231,6 @@ export default function DocumentForm({
                           {...fieldVerticle}
                         />
                       </Col>
-                      <Col span={8}>
-                        <Form.Item name={['docIn', 'receiverDate']} {...fieldVerticle}>
-                          <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
-                        </Form.Item>
-                      </Col>
                     </Row>
                   </Card>
                 )}
@@ -248,13 +243,13 @@ export default function DocumentForm({
                   </Form.Item>
 
                   <Form.Item name="signDate" label="កាលបរិច្ឆេទ">
-                    <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
+                    <DatePicker showTime format="DD-MM-YYYY" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                   </Form.Item>
                 </Card>
               )}
 
               {isAdmin && (
-                <Card title="ឯកសារចេញ" {...cardOpts}>
+                <Card title={t('label.docOut')} {...cardOpts}>
                   <Form.Item name={['docOut', 'date']} label="កាលបរិច្ឆេទបញ្ចេញឯកសារ">
                     <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />
                   </Form.Item>
