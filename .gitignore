@@ -24,3 +24,6 @@ template
 .env.stage
 dev_deploy.sh
 pro_deploy.sh
+
+/dump
+tsconfig.tsbuildinfo
