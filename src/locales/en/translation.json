@@ -35,5 +35,16 @@
     "normal": "Normal",
     "urgent": "Urgent",
     "signature": "Signatured"
+  },
+  "label": {
+    "no": "ល.រ",
+    "docStatus": "ស្ថានភាពឯកសារ",
+    "docIn": "ឯកសារចូលការិយាល័យជំនួយការ",
+    "docOut": "ឯកសារចេញការិយាល័យជំនួយការ"
+  },
+  "roles": {
+    "admin": "អ្នកគ្រប់គ្រង",
+    "assistant": "ក្រុមជំនួយការ",
+    "officer": "មន្ត្រី"
   }
 }
