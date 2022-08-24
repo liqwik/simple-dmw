@@ -10,7 +10,6 @@ import {
   EditOutlined,
 } from '@ant-design/icons';
 import { getUserFullName } from 'utils/string';
-import { DOC_STATUS_LABEL } from 'utils/constants';
 import DescriptionItem from 'app/components/Utilities/Display/DescriptionItem';
 import { FcApproval } from 'react-icons/fc';
 import { AppStorage } from 'utils';
@@ -89,7 +88,7 @@ function DocumentDetail({ item, visible, onClose }: any) {
               content={
                 <Badge
                   status={docStatus === 'signature' ? 'success' : docStatus === 'urgent' ? 'error' : 'warning'}
-                  text={DOC_STATUS_LABEL[docStatus]}
+                  text={t(`docStatus.${docStatus}`)}
                 />
               }
             />

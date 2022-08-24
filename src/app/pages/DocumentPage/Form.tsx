@@ -7,7 +7,7 @@ import { AppLayoutWithHeader } from 'app/components/UI/Layout';
 import { FieldErrorMsg } from 'app/components/UI/Message';
 import moment from 'moment';
 import useDocType from 'hooks/useDocType';
-import { DOC_STATUS_LABEL, ROLES } from 'utils/constants';
+import { DOC_STATUS, ROLES } from 'utils/constants';
 import { InstitutionDropdown } from 'app/features/InstitutionDropdown/InstitutionDropdown';
 import { UserDropdown } from 'app/features/UserDropdown';
 import DateTimeUtil from 'utils/DateTimeUtil';
@@ -186,9 +186,8 @@ export default function DocumentForm({
                 <Form.Item name="docStatus" label="ស្ថានភាពឯកសារ">
                   <Radio.Group>
                     <Space direction="vertical">
-                      <Radio value="normal">{DOC_STATUS_LABEL.normal}</Radio>
-                      <Radio value="urgent">{DOC_STATUS_LABEL.urgent}</Radio>
-                      <Radio value="signature">{DOC_STATUS_LABEL.signature}</Radio>
+                      <Radio value={DOC_STATUS.normal}>{t(`docStatus.${DOC_STATUS.normal}`)}</Radio>
+                      <Radio value={DOC_STATUS.urgent}>{t(`docStatus.${DOC_STATUS.urgent}`)}</Radio>
                     </Space>
                   </Radio.Group>
                 </Form.Item>

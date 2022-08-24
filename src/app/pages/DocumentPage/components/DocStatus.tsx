@@ -1,9 +1,12 @@
 import React from 'react';
 import { Badge } from 'antd';
-import { docStatus, DOC_STATUS_LABEL } from 'utils/constants';
+import { docStatus } from 'utils/constants';
+import { useTranslation } from 'react-i18next';
 
 const DocStatus: React.FC<any> = ({ value }) => {
-  return <Badge status={docStatus.badge[value]} text={DOC_STATUS_LABEL[value]} />;
+  const { t } = useTranslation();
+
+  return <Badge status={docStatus.badge[value]} text={t(`docStatus.${value}`)} />;
 };
 
 export default DocStatus;

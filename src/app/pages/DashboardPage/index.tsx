@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppLayout } from 'app/components/UI/Layout';
-import { Card, Col, Row, Statistic } from 'antd';
+import { Card, Col, Row } from 'antd';
 import { reportService } from 'services';
 import DocTypeReport from './DocTypeReport';
 import DateTimeUtil from 'utils/DateTimeUtil';
@@ -8,10 +8,11 @@ import DateFilter from './DateFilter';
 import moment from 'moment';
 import { DashboardCard } from 'app/components/Card/DashboardCard';
 import { FcDocument, FcPackage, FcAnswers, FcInspection } from 'react-icons/fc';
-import { parse } from 'path';
 import IconUrgentDoc from 'app/components/UI/Icon/IconUrgentDoc';
+import { useTranslation } from 'react-i18next';
 
 function DashboardPage() {
+  const { t } = useTranslation();
   const [summaryData, setSummaryData] = useState<any>({ normal: '0', urgent: '0', signature: '0' });
   const [docTypeReport, setDocTypeReport] = useState<any>(null);
   const [dateFilter, setDateFilter] = useState<any>({
@@ -77,7 +78,7 @@ function DashboardPage() {
 
         <Col sm={12} md={6}>
           <DashboardCard
-            title="ឯកសារធម្មតា"
+            title={t('docStatus.normal')}
             color="#096dd9"
             icon={<FcDocument size="2rem" />}
             value={summaryData?.normal}
@@ -86,7 +87,7 @@ function DashboardPage() {
 
         <Col sm={12} md={6}>
           <DashboardCard
-            title="ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់"
+            title={t('docStatus.urgent')}
             color="#cf1322"
             icon={<IconUrgentDoc />}
             value={summaryData?.urgent}

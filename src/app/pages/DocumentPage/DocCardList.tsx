@@ -3,7 +3,6 @@ import { Button, Card, Col, Divider, Row, Space, Tag, Typography } from 'antd';
 import DisplayDateTime from 'app/components/DateTime/DisplayDateTime';
 import { getUserFullName } from 'utils/string';
 import DescriptionItem from 'app/components/Utilities/Display/DescriptionItem';
-import { DOC_STATUS_LABEL } from 'utils/constants';
 import SignRemark from './components/SignRemark';
 import Paragraph from 'antd/lib/typography/Paragraph';
 import EditButton from './components/EditButton';
@@ -78,7 +77,7 @@ function DocCardList({ isAdmin, item, loading, pagination, onViewDetail, onPageC
             title="ស្ថានភាពឯកសារ"
             content={
               <Tag color={docStatus === 'signature' ? 'green' : docStatus === 'urgent' ? 'red' : 'blue'}>
-                {DOC_STATUS_LABEL[docStatus]}
+                {t(`docStatus.${docStatus}`)}
               </Tag>
             }
           />
