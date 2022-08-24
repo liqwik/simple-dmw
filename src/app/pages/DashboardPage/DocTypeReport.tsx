@@ -24,12 +24,6 @@ const columns = [
         render: (_e, record) => <Text>{record?.totalDoc?.signed?.urgent || 0}</Text>,
       },
       {
-        title: 'បានចាររួច',
-        dataIndex: 'totalDoc.signed.signature',
-        align: 'center',
-        render: (_e, record) => <Text>{record?.totalDoc?.signed?.signature || 0}</Text>,
-      },
-      {
         title: <Text strong>សរុប</Text>,
         dataIndex: 'id',
         align: 'center',
