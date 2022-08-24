@@ -7,12 +7,14 @@ import { AppLayoutWithHeader } from 'app/components/UI/Layout';
 import { FieldErrorMsg } from 'app/components/UI/Message';
 import moment from 'moment';
 import useDocType from 'hooks/useDocType';
-import { AppStorage } from 'utils';
-import { DOC_STATUS_LABEL } from 'utils/constants';
+import { DOC_STATUS_LABEL, ROLES } from 'utils/constants';
 import { InstitutionDropdown } from 'app/features/InstitutionDropdown/InstitutionDropdown';
 import { UserDropdown } from 'app/features/UserDropdown';
 import DateTimeUtil from 'utils/DateTimeUtil';
 import { useTranslation } from 'react-i18next';
+import { useLoginSlice } from '../AuthPage/slice';
+import { useSelector } from 'react-redux';
+import { selectLogin } from '../AuthPage/slice/selectors';
 
 type IDocumentForm = {
   form: FormInstance;
@@ -33,9 +35,13 @@ export default function DocumentForm({
   serviceError,
   onSubmit,
 }: IDocumentForm) {
+  useLoginSlice();
+  const { user } = useSelector(selectLogin);
   const { t } = useTranslation();
   const [docTypeList]: any = useDocType();
-  const isAdmin = AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin;
+  const { isAdmin, permissions } = user;
+
+  const notAllowEdit = () => permissions.toLowerCase() === ROLES.assistant;
 
   /** Mounting & Updating */
   useEffect(() => {
@@ -128,6 +134,7 @@ export default function DocumentForm({
                 <MyTextInput
                   label="លិខិតលេខ"
                   name="docNo"
+                  disabled={notAllowEdit()}
                   rules={[
                     {
                       required: true,
@@ -136,25 +143,35 @@ export default function DocumentForm({
                   ]}
                 />
                 <Form.Item name="docDate" label="កាលបរិច្ឆេទលិខិត">
-                  <DatePicker format="DD-MM-YYYY" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" onChange={handleDocDateChange} />
+                  <DatePicker
+                    format="DD-MM-YYYY"
+                    placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
+                    disabled={notAllowEdit()}
+                    onChange={handleDocDateChange}
+                  />
                 </Form.Item>
 
                 <Form.Item noStyle shouldUpdate={(prevValues, curValues) => prevValues.docDate !== curValues.docDate}>
                   {() => (
                     <Form.Item name="docLunarDate" label="កាលបរិច្ឆេទចន្ទគតិ">
-                      <Input.TextArea placeholder="ថ្ងៃព្រហស្បតិ៍ ១៤កើត ខែភទ្របទ ឆ្នាំកុរ ឯកស័ក​ ព.ស.២៥៦៣" rows={2} />
+                      <Input.TextArea
+                        disabled={notAllowEdit()}
+                        placeholder="ថ្ងៃព្រហស្បតិ៍ ១៤កើត ខែភទ្របទ ឆ្នាំកុរ ឯកស័ក​ ព.ស.២៥៦៣"
+                        rows={2}
+                      />
                     </Form.Item>
                   )}
                 </Form.Item>
 
                 <InstitutionDropdown
+                  disabled={notAllowEdit()}
                   onSelectedValue={value => {
                     form.setFieldsValue({ institutionId: value });
                   }}
                 />
 
                 <Form.Item name="docDescription" label="កម្មវត្ថុ">
-                  <Input.TextArea rows={6} />
+                  <Input.TextArea disabled={notAllowEdit()} rows={6} />
                 </Form.Item>
 
                 <MySelect name="docTypeId" label="ប្រភេទឯកសារ" placeholder="ជ្រើសរើសប្រភេទឯកសារ">

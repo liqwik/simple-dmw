@@ -43,3 +43,17 @@ export const listViewMode = {
   TABLE: 'table',
   CARD: 'card',
 };
+
+export const ROLES = {
+  admin: 'admin',
+  assistant: 'assistant',
+  officer: 'officer',
+};
+
+export const permissions = {
+  admin: '*',
+  assistant: {
+    dashboard: ['create', 'edit', 'view', 'delete'],
+  },
+  officer: {},
+};

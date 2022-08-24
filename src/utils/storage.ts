@@ -9,6 +9,22 @@ export class AppStorage {
     localStorage.setItem('t', JSON.stringify(data));
   }
 
+  static getUser() {
+    const user = localStorage.getItem('t');
+
+    if (!user) return null;
+
+    const { fn, ln, usr, permissions, isAdmin } = JSON.parse(user);
+
+    return {
+      fn,
+      ln,
+      usr,
+      isAdmin,
+      permissions,
+    };
+  }
+
   static removeAuthData(isRefresh) {
     localStorage.removeItem('t');
 

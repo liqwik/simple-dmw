@@ -5,9 +5,11 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { loginSaga } from './saga';
 import { LoginState } from './types';
 
+const userData = AppStorage.getUser();
+
 export const initialState: LoginState = {
-  user: {},
-  isAdmin: AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin,
+  user: userData,
+  isAdmin: userData?.isAdmin,
   loading: false,
   error: '',
 };

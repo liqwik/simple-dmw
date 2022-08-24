@@ -6,6 +6,8 @@ import { MyPasswordInput, MySelect, MySubmitButton, MyTextInput } from 'app/comp
 import { SaveOutlined } from '@ant-design/icons';
 import { AppLayoutWithHeader } from 'app/components/UI/Layout';
 import { FieldErrorMsg } from 'app/components/UI/Message';
+import { useTranslation } from 'react-i18next';
+import { ROLES } from 'utils/constants';
 
 type IInternalUserForm = {
   form?: any;
@@ -27,6 +29,8 @@ function InternalUserForm({
   serviceError,
   onSubmit,
 }: IInternalUserForm) {
+  const { t } = useTranslation();
+
   /** Mounting & Updating */
   useEffect(() => {
     if (validateErrors && validateErrors.length > 0) {
@@ -110,8 +114,9 @@ function InternalUserForm({
                   ]}
                   placeholder="Please select a role"
                 >
-                  <MySelect.Option value="admin">Admin</MySelect.Option>
-                  <MySelect.Option value="officer">Officer</MySelect.Option>
+                  <MySelect.Option value={ROLES.admin}>{t('roles.admin')}</MySelect.Option>
+                  <MySelect.Option value={ROLES.assistant}>{t('roles.assistant')}</MySelect.Option>
+                  <MySelect.Option value={ROLES.officer}>{t('roles.officer')}</MySelect.Option>
                 </MySelect>
 
                 {!isEdit ? (

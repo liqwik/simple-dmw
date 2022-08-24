@@ -8,14 +8,21 @@ import {
   FileTextTwoTone,
 } from '@ant-design/icons';
 import AppRoute from 'utils/AppRoute';
-import { AppStorage } from 'utils';
-import { Menu, Typography } from 'antd';
+import { Menu } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useLoginSlice } from './pages/AuthPage/slice';
+import { selectLogin } from './pages/AuthPage/slice/selectors';
+import { ACL } from 'utils/acl';
+import { ROLES } from 'utils/constants';
 
 function SideBarMenuData({ theme }) {
+  useLoginSlice();
   const { t } = useTranslation();
-  const isAdmin = AppStorage.getAuthData() && AppStorage.getAuthData().isAdmin;
+  const { user } = useSelector(selectLogin);
+  const { permissions } = user;
+
   const adminMenu = [
     {
       key: 'dashboard',
@@ -89,6 +96,53 @@ function SideBarMenuData({ theme }) {
     },
   ];
 
+  const assistantMenu = [
+    {
+      key: 'dashboard',
+      label: t('dashboard'),
+      navigateTo: AppRoute.dashboard,
+      icon: <DashboardTwoTone />,
+    },
+    {
+      key: 'document',
+      label: t('doc.mgmt'),
+      navigateTo: AppRoute.document,
+      icon: <FileTextTwoTone />,
+    },
+    {
+      key: 'ref-data',
+      label: t('refData'),
+      icon: <BuildTwoTone />,
+      children: [
+        {
+          key: 'institution',
+          label: t('institution'),
+          navigateTo: AppRoute.institution,
+          icon: <GoldTwoTone />,
+        },
+        {
+          key: 'doc-type',
+          label: t('doc.type'),
+          navigateTo: AppRoute.docType,
+          icon: <TagTwoTone />,
+        },
+      ],
+    },
+    {
+      key: 'user-management',
+      label: t('account'),
+      icon: <CrownTwoTone />,
+      children: [
+        {
+          key: 'user',
+          label: t('user'),
+          navigateTo: AppRoute.user,
+          icon: <CrownTwoTone />,
+        },
+      ],
+    },
+  ];
+
   const officerMenu = [
     {
       key: 'dashboard',
@@ -126,8 +180,19 @@ function SideBarMenuData({ theme }) {
         menuItem['children'] = transformMenu(children);
       }
 
-      return menuItem;
+      if (permissions) return menuItem;
     });
+  };
+
+  const getMenuByRole = userPermission => {
+    if (userPermission === ROLES.admin || userPermission === 'super_admin') {
+      return adminMenu;
+    }
+    if (userPermission === ROLES.assistant) {
+      return assistantMenu;
+    }
+
+    return officerMenu;
   };
 
   return (
@@ -135,7 +200,7 @@ function SideBarMenuData({ theme }) {
       theme={theme}
       mode="inline"
       style={{ height: '100%' }}
-      items={transformMenu(isAdmin ? adminMenu : officerMenu)}
+      items={transformMenu(getMenuByRole(permissions.toLowerCase()))}
     />
   );
 }

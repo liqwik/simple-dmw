@@ -21,10 +21,3 @@ export const createPassword = (length = 16, chars?) => {
 
   return result.join('');
 };
-
-export const transformRoleToLabel = {
-  prof: 'Professional',
-  editor: 'Editor',
-  admin: 'Admin',
-  user: 'User',
-};
