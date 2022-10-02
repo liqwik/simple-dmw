@@ -25,6 +25,7 @@ import reportWebVitals from 'reportWebVitals';
 import './locales/i18n';
 
 import './styles.less';
+import 'react-quill/dist/quill.snow.css';
 
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
