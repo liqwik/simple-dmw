@@ -111,18 +111,15 @@ function DocTypeReport({ data }) {
                 <Text>{signed.urgent}</Text>
               </Table.Summary.Cell>
               <Table.Summary.Cell index={4} align="center">
-                <Text>{signed.signature}</Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={5} align="center">
                 <Text>{signed.normal + signed.urgent + signed.signature}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={6} align="center">
+              <Table.Summary.Cell index={5} align="center">
                 <Text>{notSign.normal}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={7} align="center">
+              <Table.Summary.Cell index={6} align="center">
                 <Text>{notSign.urgent}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={9} align="center">
+              <Table.Summary.Cell index={7} align="center">
                 <Text>{notSign.normal + notSign.urgent + notSign.signature}</Text>
               </Table.Summary.Cell>
             </Table.Summary.Row>
