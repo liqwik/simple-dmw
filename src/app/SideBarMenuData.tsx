@@ -14,14 +14,13 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useLoginSlice } from './pages/AuthPage/slice';
 import { selectLogin } from './pages/AuthPage/slice/selectors';
-import { ACL } from 'utils/acl';
 import { ROLES } from 'utils/constants';
 
 function SideBarMenuData({ theme }) {
   useLoginSlice();
   const { t } = useTranslation();
   const { user } = useSelector(selectLogin);
-  const { permissions } = user;
+  const { permissions: userPermissions } = user;
 
   const adminMenu = [
     {
@@ -180,7 +179,7 @@ function SideBarMenuData({ theme }) {
         menuItem['children'] = transformMenu(children);
       }
 
-      if (permissions) return menuItem;
+      return menuItem;
     });
   };
 
@@ -188,6 +187,7 @@ function SideBarMenuData({ theme }) {
     if (userPermission === ROLES.admin || userPermission === 'super_admin') {
       return adminMenu;
     }
+
     if (userPermission === ROLES.assistant) {
       return assistantMenu;
     }
@@ -200,7 +200,7 @@ function SideBarMenuData({ theme }) {
       theme={theme}
       mode="inline"
       style={{ height: '100%' }}
-      items={transformMenu(getMenuByRole(permissions.toLowerCase()))}
+      items={transformMenu(getMenuByRole(userPermissions.toLowerCase()))}
     />
   );
 }
