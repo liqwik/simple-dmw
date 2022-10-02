@@ -4,7 +4,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import useInstitution from 'hooks/useInstitution';
 import { InstitutionFormModal } from './InstitutionFormModal';
 
-export function InstitutionDropdown({ onSelectedValue }) {
+export function InstitutionDropdown({ disabled, onSelectedValue }) {
   const { items, dispatchAddAction }: any = useInstitution();
   const [visible, setVisible] = useState(false);
   const isCreateNewData = useRef(false);
@@ -29,9 +29,7 @@ export function InstitutionDropdown({ onSelectedValue }) {
     setVisible(false);
   };
 
-  const handleSearch = value => {
-    console.log(value);
-  };
+  const handleSearch = value => {};
 
   return (
     <>
@@ -44,7 +42,7 @@ export function InstitutionDropdown({ onSelectedValue }) {
             marginRight: '8px',
           }}
         >
-          <Select showSearch onSearch={handleSearch} placeholder="ជ្រើសរើសប្រភពលិខិត">
+          <Select disabled={disabled} showSearch onSearch={handleSearch} placeholder="ជ្រើសរើសប្រភពលិខិត">
             {items &&
               items.map(ins => (
                 <Select.Option key={ins.id} value={ins.id}>
@@ -54,7 +52,7 @@ export function InstitutionDropdown({ onSelectedValue }) {
           </Select>
         </Form.Item>
 
-        <Button type="primary" onClick={showForm}>
+        <Button type="primary" disabled={disabled} onClick={showForm}>
           <PlusOutlined />
         </Button>
       </Form.Item>

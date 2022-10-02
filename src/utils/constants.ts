@@ -33,12 +33,6 @@ export const DOC_STATUS = {
   urgent: 'urgent',
 };
 
-export const DOC_STATUS_LABEL = {
-  normal: 'ឯកសារធម្មតា',
-  signature: 'ឯកសារបានចាររួច',
-  urgent: 'ប្រញាប់ ឬ ជិតដល់ថ្ងៃកំណត់',
-};
-
 export const listViewMode = {
   TABLE: 'table',
   CARD: 'card',

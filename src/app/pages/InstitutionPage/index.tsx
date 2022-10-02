@@ -23,6 +23,10 @@ interface Props {
 }
 
 export function InstitutionPage({ location }: Props) {
+  const dispatch = useDispatch();
+  const { actions } = useInstitutionSlice();
+  const { items, totalItem, serviceError, validationErrors, isSubmitting, isLoading } = useSelector(selectInstitution);
+
   const qs = getQueryParams(location.search);
 
   const [filterQuery, setFilterQuery] = useState<any>({
@@ -32,13 +36,9 @@ export function InstitutionPage({ location }: Props) {
     limit: qs.get('limit') || ITEM_LIMIT,
     page: qs.get('page') || 1,
   });
-  const [editItem, setEditItem] = useState<any>(null);
-
-  const dispatch = useDispatch();
-  const { actions } = useInstitutionSlice();
-  const { items, totalItem, serviceError, validationErrors, isSubmitting, isLoading } = useSelector(selectInstitution);
-
   const [updateUriQuery] = useQueryString({ appRoute: AppRoute.institution });
+
+  const [editItem, setEditItem] = useState<any>(null);
   const [form] = useForm();
 
   useEffect(() => {
