@@ -14,6 +14,7 @@ import DescriptionItem from 'app/components/Utilities/Display/DescriptionItem';
 import { FcApproval } from 'react-icons/fc';
 import { AppStorage } from 'utils';
 import { useTranslation } from 'react-i18next';
+import RenderQuillValue from 'app/components/UI/RichTextEditor/RenderQuillValue';
 
 const { Title } = Typography;
 
@@ -80,7 +81,7 @@ function DocumentDetail({ item, visible, onClose }: any) {
             <DescriptionItem title="ប្រភេទឯកសារ" content={docTypeId && docTypeId.name} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="កម្មវត្ថុ" content={docDescription} />
+            <DescriptionItem title="កម្មវត្ថុ" content={<RenderQuillValue content={docDescription} />} />
           </Col>
           <Col span={12}>
             <DescriptionItem
@@ -127,7 +128,7 @@ function DocumentDetail({ item, visible, onClose }: any) {
           <Space align="start">
             <ExportOutlined {...iconTitleProps} />
             <Title level={5} {...cardTitleStyle}>
-              {t('label.docIn')}
+              {t('label.docInNo')}
             </Title>
           </Space>
         }
@@ -135,7 +136,7 @@ function DocumentDetail({ item, visible, onClose }: any) {
       >
         <Row gutter={[16, 16]}>
           <Col span={12}>
-            <DescriptionItem title="លេខចូលខេត្ត" content={docIn && docIn.no} />
+            <DescriptionItem title="លេខ" content={docIn && docIn.no} />
           </Col>
           <Col span={12}>
             <DescriptionItem title="កាលបរិច្ឆេទចូលខេត្ត" content={DateTimeUtil.forDisplay(docIn && docIn.date)} />

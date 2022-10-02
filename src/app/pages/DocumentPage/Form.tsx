@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Col, Row, Card, Form, Space, DatePicker, Radio, Input, FormInstance } from 'antd';
 import { cardOpts, formItemLayout, fieldVerticle } from './FormStyles';
 import { MySelect, MySubmitButton, MyTextInput } from 'app/components/UI/Form';
@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useLoginSlice } from '../AuthPage/slice';
 import { useSelector } from 'react-redux';
 import { selectLogin } from '../AuthPage/slice/selectors';
+import QuillEditor from 'app/components/UI/RichTextEditor/QuillEditor';
 
 type IDocumentForm = {
   form: FormInstance;
@@ -41,8 +42,6 @@ export default function DocumentForm({
   const [docTypeList]: any = useDocType();
   const { isAdmin, permissions } = user;
 
-  const notAllowEdit = () => permissions.toLowerCase() === ROLES.assistant;
-
   /** Mounting & Updating */
   useEffect(() => {
     if (validateErrors && validateErrors.length > 0) {
@@ -50,7 +49,7 @@ export default function DocumentForm({
     }
 
     if (isEdit && editDocument) {
-      const { docDate, docIn, docOut, issueDate, receivedDate, signDate } = editDocument;
+      const { docDate, docIn, docOut, issueDate, receivedDate, signDate, docDescription } = editDocument;
 
       form.setFieldsValue({
         ...editDocument,
@@ -71,12 +70,13 @@ export default function DocumentForm({
         issueDate: issueDate && moment(issueDate),
         receivedDate: receivedDate && moment(receivedDate),
         signDate: signDate && moment(signDate),
+        docDescription: docDescription && docDescription.startsWith('{') ? JSON.parse(docDescription) : docDescription,
       });
     }
   }, [form, editDocument, isEdit, validateErrors]);
 
   const handleSubmit = fieldsValue => {
-    const { docDate, docIn, docOut, issueDate, receivedDate, signDate } = fieldsValue;
+    const { docDate, docIn, docOut, issueDate, receivedDate, signDate, docDescription } = fieldsValue;
     const defaultDateFormat = 'YYYY-MM-DD HH:mm:ss';
 
     const values = {
@@ -96,24 +96,40 @@ export default function DocumentForm({
       issueDate: issueDate && issueDate.format(defaultDateFormat),
       receivedDate: receivedDate && receivedDate.format(defaultDateFormat),
       signDate: signDate && signDate.format(defaultDateFormat),
+      docDescription: JSON.stringify(docDescription),
     };
 
     onSubmit(values);
   };
 
-  const handleDocInSenderSelect = value => {
-    form.setFieldsValue({ docIn: { sender: value } });
+  const handleDocInSenderSelect = useCallback(
+    value => {
+      form.setFieldsValue({ docIn: { sender: value } });
+    },
+    [form],
+  );
+
+  const handleDocInReceiverSelect = useCallback(
+    value => {
+      form.setFieldsValue({ docIn: { receiver: value } });
+    },
+    [form],
+  );
+
+  const handleDocDateChange = useCallback(
+    value => {
+      const lunarDate = DateTimeUtil.formatLunarDate(value);
+
+      form.setFieldsValue({ docLunarDate: lunarDate });
+    },
+    [form],
+  );
+
+  const handleEditorChange = (value, delta, source, editor) => {
+    form.setFieldsValue({ docDescription: editor.getContents() });
   };
 
-  const handleDocInReceiverSelect = value => {
-    form.setFieldsValue({ docIn: { receiver: value } });
-  };
-
-  const handleDocDateChange = value => {
-    const lunarDate = DateTimeUtil.formatLunarDate(value);
-
-    form.setFieldsValue({ docLunarDate: lunarDate });
-  };
+  const notAllowEdit = useMemo(() => permissions.toLowerCase() === ROLES.assistant, [permissions]);
 
   return (
     <>
@@ -134,7 +150,7 @@ export default function DocumentForm({
                 <MyTextInput
                   label="លិខិតលេខ"
                   name="docNo"
-                  disabled={notAllowEdit()}
+                  disabled={notAllowEdit}
                   rules={[
                     {
                       required: true,
@@ -146,7 +162,7 @@ export default function DocumentForm({
                   <DatePicker
                     format="DD-MM-YYYY"
                     placeholder="ជ្រើសរើសកាលបរិច្ឆេទ"
-                    disabled={notAllowEdit()}
+                    disabled={notAllowEdit}
                     onChange={handleDocDateChange}
                   />
                 </Form.Item>
@@ -155,7 +171,7 @@ export default function DocumentForm({
                   {() => (
                     <Form.Item name="docLunarDate" label="កាលបរិច្ឆេទចន្ទគតិ">
                       <Input.TextArea
-                        disabled={notAllowEdit()}
+                        disabled={notAllowEdit}
                         placeholder="ថ្ងៃព្រហស្បតិ៍ ១៤កើត ខែភទ្របទ ឆ្នាំកុរ ឯកស័ក​ ព.ស.២៥៦៣"
                         rows={2}
                       />
@@ -164,14 +180,15 @@ export default function DocumentForm({
                 </Form.Item>
 
                 <InstitutionDropdown
-                  disabled={notAllowEdit()}
+                  disabled={notAllowEdit}
                   onSelectedValue={value => {
                     form.setFieldsValue({ institutionId: value });
                   }}
                 />
 
                 <Form.Item name="docDescription" label="កម្មវត្ថុ">
-                  <Input.TextArea disabled={notAllowEdit()} rows={6} />
+                  <QuillEditor onChange={handleEditorChange} />
+                  {/* <Input.TextArea disabled={notAllowEdit()} rows={6} /> */}
                 </Form.Item>
 
                 <MySelect name="docTypeId" label="ប្រភេទឯកសារ" placeholder="ជ្រើសរើសប្រភេទឯកសារ">
@@ -193,8 +210,8 @@ export default function DocumentForm({
                 </Form.Item>
               </Card>
 
-              <Card title={t('label.docIn')} {...cardOpts}>
-                <MyTextInput name={['docIn', 'no']} label="លេខចូលខេត្ត" />
+              <Card title="លេខចូលខេត្ត" {...cardOpts}>
+                <MyTextInput name={['docIn', 'no']} label="លេខ" />
 
                 <Form.Item name={['docIn', 'date']} label="កាលបរិច្ឆេទចូលខេត្ត">
                   <DatePicker showTime format="DD-MM-YYYY HH:mm A" placeholder="ជ្រើសរើសកាលបរិច្ឆេទ" />

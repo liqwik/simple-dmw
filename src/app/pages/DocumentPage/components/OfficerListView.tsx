@@ -8,6 +8,7 @@ import { ColumnsType } from 'antd/lib/table';
 import TableActionMenu from './TableActionMenu';
 import DocStatus from './DocStatus';
 import { FcApproval } from 'react-icons/fc';
+import RenderQuillValue from 'app/components/UI/RichTextEditor/RenderQuillValue';
 
 export function OfficerListView({ items, loading, pagination, onViewDetail, onPageChange, onPrintDoc }) {
   const columns: ColumnsType<any> = [
@@ -63,7 +64,7 @@ export function OfficerListView({ items, loading, pagination, onViewDetail, onPa
       dataIndex: 'id',
       key: 'id',
       width: 220,
-      render: (_e, { docDescription }) => <Text>{docDescription}</Text>,
+      render: (_e, { docDescription }) => <RenderQuillValue content={docDescription} />,
     },
     {
       title: <Text strong>លេខចូលខេត្ត</Text>,

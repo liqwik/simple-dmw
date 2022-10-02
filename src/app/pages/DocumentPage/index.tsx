@@ -134,7 +134,7 @@ export function DocumentPage({ location }: Props) {
           <Row gutter={[16, 16]}>
             {items &&
               items.map(item => (
-                <Col span={8} key={item.id}>
+                <Col xs={24} sm={12} md={8} key={item.id}>
                   <DocCardList
                     isAdmin={isAdmin}
                     item={item}

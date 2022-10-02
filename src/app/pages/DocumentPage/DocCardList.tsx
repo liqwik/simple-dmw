@@ -4,7 +4,6 @@ import DisplayDateTime from 'app/components/DateTime/DisplayDateTime';
 import { getUserFullName } from 'utils/string';
 import DescriptionItem from 'app/components/Utilities/Display/DescriptionItem';
 import SignRemark from './components/SignRemark';
-import Paragraph from 'antd/lib/typography/Paragraph';
 import EditButton from './components/EditButton';
 import AppRoute from 'utils/AppRoute';
 import PrintButton from './components/PrintButton';
@@ -12,6 +11,7 @@ import DownloadButton from './components/DownloadButton';
 import { ApiRoute } from 'utils';
 import { FcApproval } from 'react-icons/fc';
 import { useTranslation } from 'react-i18next';
+import RenderQuillValue from 'app/components/UI/RichTextEditor/RenderQuillValue';
 
 const { Text } = Typography;
 
@@ -94,11 +94,7 @@ function DocCardList({ isAdmin, item, loading, pagination, onViewDetail, onPageC
           <DescriptionItem
             title="កម្មវត្ថុ"
             style={{ width: '100%' }}
-            content={
-              docDescription && (
-                <Paragraph ellipsis={{ rows: 1, expandable: true, symbol: 'អានបន្ថែម' }}>{docDescription}</Paragraph>
-              )
-            }
+            content={docDescription && <RenderQuillValue content={docDescription} />}
           />
         </Col>
       </Row>
